@@ -147,7 +147,7 @@ export default function RecognitionPage() {
             <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-2xl flex items-center justify-center">
               <Palette className="w-10 h-10 text-white" />
             </div>
-            <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+            <h1 className="text-5xl font-bold mb-8 bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent leading-tight">
               Smart Recognition System
             </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
