@@ -45,19 +45,21 @@ export default function RecognitionPage() {
       <header className="fixed top-0 left-0 right-0 z-50 glass border-b">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
-            <Link href="/" className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg flex items-center justify-center">
-                <Code className="w-5 h-5 text-white" />
+            <div className="flex items-center gap-4 lg:gap-8">
+              <Link href="/" className="flex items-center gap-2 flex-shrink-0">
+                <div className="w-8 h-8 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg flex items-center justify-center">
+                  <Code className="w-5 h-5 text-white" />
+                </div>
+                <span className="font-bold text-lg lg:text-xl">SketchToCode</span>
+              </Link>
+
+              <div className="hidden lg:flex items-center gap-6">
+                <Link href="/#features" className="text-gray-600 hover:text-gray-900 transition text-sm lg:text-base whitespace-nowrap">Features</Link>
+                <Link href="/#how-it-works" className="text-gray-600 hover:text-gray-900 transition text-sm lg:text-base whitespace-nowrap">How It Works</Link>
+                <Link href="/recognition" className="text-indigo-600 hover:text-indigo-700 transition font-medium text-sm lg:text-base whitespace-nowrap">Smart Recognition</Link>
+                <Link href="/#pricing" className="text-gray-600 hover:text-gray-900 transition text-sm lg:text-base whitespace-nowrap">Pricing</Link>
+                <Link href="/#faq" className="text-gray-600 hover:text-gray-900 transition text-sm lg:text-base whitespace-nowrap">FAQ</Link>
               </div>
-              <span className="font-bold text-xl">SketchToCode</span>
-            </Link>
-            
-            <div className="hidden md:flex items-center gap-8">
-              <Link href="/#features" className="text-gray-600 hover:text-gray-900 transition">Features</Link>
-              <Link href="/#how-it-works" className="text-gray-600 hover:text-gray-900 transition">How It Works</Link>
-              <Link href="/recognition" className="text-indigo-600 hover:text-indigo-700 transition font-medium">Smart Recognition</Link>
-              <Link href="/#pricing" className="text-gray-600 hover:text-gray-900 transition">Pricing</Link>
-              <Link href="/#faq" className="text-gray-600 hover:text-gray-900 transition">FAQ</Link>
             </div>
 
             <div className="flex items-center gap-4">
@@ -74,16 +76,16 @@ export default function RecognitionPage() {
               </button>
 
               {isLoaded && user ? (
-                <Link href="/app" className="hidden md:block">
-                  <Button variant="gradient">Go to App</Button>
+                <Link href="/app" className="hidden lg:block">
+                  <Button variant="gradient" className="text-sm lg:text-base">Go to App</Button>
                 </Link>
               ) : (
                 <>
-                  <Link href="/sign-in" className="hidden md:block">
-                    <Button variant="ghost">Sign In</Button>
+                  <Link href="/sign-in" className="hidden lg:block">
+                    <Button variant="ghost" className="text-sm lg:text-base">Sign In</Button>
                   </Link>
-                  <Link href="/sign-up" className="hidden md:block">
-                    <Button variant="gradient">Get Started Free</Button>
+                  <Link href="/sign-up" className="hidden lg:block">
+                    <Button variant="gradient" className="text-sm lg:text-base">Get Started Free</Button>
                   </Link>
                 </>
               )}
@@ -171,10 +173,10 @@ export default function RecognitionPage() {
             <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-2xl flex items-center justify-center">
               <Palette className="w-10 h-10 text-white" />
             </div>
-            <h1 className="text-5xl font-bold mb-8 bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent leading-tight">
+            <h1 className="text-fluid-5xl font-bold mb-8 bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent leading-tight">
               Smart Recognition System
             </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+            <p className="text-fluid-xl text-gray-600 max-w-4xl mx-auto mb-8">
               Master the art of wireframe-to-code conversion with our intelligent text and color recognition system
             </p>
             <Link href="/app">

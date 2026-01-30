@@ -11,12 +11,44 @@ const config: Config = {
   theme: {
     container: {
       center: true,
-      padding: "2rem",
+      padding: {
+        DEFAULT: "1rem",
+        sm: "1.5rem",
+        lg: "2rem",
+        xl: "2rem",
+        "2xl": "2rem",
+      },
       screens: {
+        sm: "640px",
+        md: "768px",
+        lg: "1024px",
+        xl: "1280px",
         "2xl": "1400px",
       },
     },
     extend: {
+      fontSize: {
+        'fluid-xs': 'clamp(0.75rem, 2vw, 0.875rem)',
+        'fluid-sm': 'clamp(0.875rem, 2.5vw, 1rem)',
+        'fluid-base': 'clamp(1rem, 3vw, 1.125rem)',
+        'fluid-lg': 'clamp(1.125rem, 3.5vw, 1.25rem)',
+        'fluid-xl': 'clamp(1.25rem, 4vw, 1.5rem)',
+        'fluid-2xl': 'clamp(1.5rem, 5vw, 2rem)',
+        'fluid-3xl': 'clamp(1.875rem, 6vw, 2.5rem)',
+        'fluid-4xl': 'clamp(2.25rem, 7vw, 3rem)',
+        'fluid-5xl': 'clamp(2.5rem, 8vw, 3.5rem)',
+        'fluid-6xl': 'clamp(3rem, 9vw, 4rem)',
+        'fluid-7xl': 'clamp(3.5rem, 10vw, 5rem)',
+      },
+      spacing: {
+        '18': '4.5rem',
+        '88': '22rem',
+        '128': '32rem',
+      },
+      maxWidth: {
+        '8xl': '88rem',
+        '9xl': '96rem',
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

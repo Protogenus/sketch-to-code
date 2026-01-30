@@ -57,19 +57,21 @@ export default function LandingPage() {
       <nav className="fixed top-0 left-0 right-0 z-50 glass border-b">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
-            <Link href="/" className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg flex items-center justify-center">
-                <Code className="w-5 h-5 text-white" />
+            <div className="flex items-center gap-4 lg:gap-8">
+              <Link href="/" className="flex items-center gap-2 flex-shrink-0">
+                <div className="w-8 h-8 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg flex items-center justify-center">
+                  <Code className="w-5 h-5 text-white" />
+                </div>
+                <span className="font-bold text-lg lg:text-xl">SketchToCode</span>
+              </Link>
+
+              <div className="hidden lg:flex items-center gap-6">
+                <Link href="#features" className="text-gray-600 hover:text-gray-900 transition text-sm lg:text-base whitespace-nowrap">Features</Link>
+                <Link href="#how-it-works" className="text-gray-600 hover:text-gray-900 transition text-sm lg:text-base whitespace-nowrap">How It Works</Link>
+                <Link href="/recognition" className="text-indigo-600 hover:text-indigo-700 transition font-medium text-sm lg:text-base whitespace-nowrap">Smart Recognition</Link>
+                <Link href="#pricing" className="text-gray-600 hover:text-gray-900 transition text-sm lg:text-base whitespace-nowrap">Pricing</Link>
+                <Link href="#faq" className="text-gray-600 hover:text-gray-900 transition text-sm lg:text-base whitespace-nowrap">FAQ</Link>
               </div>
-              <span className="font-bold text-xl">SketchToCode</span>
-            </Link>
-            
-            <div className="hidden md:flex items-center gap-8">
-              <Link href="#features" className="text-gray-600 hover:text-gray-900 transition">Features</Link>
-              <Link href="#how-it-works" className="text-gray-600 hover:text-gray-900 transition">How It Works</Link>
-              <Link href="/recognition" className="text-gray-600 hover:text-gray-900 transition">Smart Recognition</Link>
-              <Link href="#pricing" className="text-gray-600 hover:text-gray-900 transition">Pricing</Link>
-              <Link href="#faq" className="text-gray-600 hover:text-gray-900 transition">FAQ</Link>
             </div>
 
             <div className="flex items-center gap-4">
@@ -86,16 +88,16 @@ export default function LandingPage() {
               </button>
 
               {isLoaded && user ? (
-                <Link href="/app" className="hidden md:block">
-                  <Button variant="gradient">Go to App</Button>
+                <Link href="/app" className="hidden lg:block">
+                  <Button variant="gradient" className="text-sm lg:text-base">Go to App</Button>
                 </Link>
               ) : (
                 <>
-                  <Link href="/sign-in" className="hidden md:block">
-                    <Button variant="ghost">Sign In</Button>
+                  <Link href="/sign-in" className="hidden lg:block">
+                    <Button variant="ghost" className="text-sm lg:text-base">Sign In</Button>
                   </Link>
-                  <Link href="/sign-up" className="hidden md:block">
-                    <Button variant="gradient">Get Started Free</Button>
+                  <Link href="/sign-up" className="hidden lg:block">
+                    <Button variant="gradient" className="text-sm lg:text-base">Get Started Free</Button>
                   </Link>
                 </>
               )}
@@ -173,7 +175,7 @@ export default function LandingPage() {
       </motion.div>
 
       {/* Hero Section */}
-      <section className="pt-32 pb-20 px-4">
+      <section className="pt-32 pb-20">
         <div className="container mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -181,12 +183,12 @@ export default function LandingPage() {
             transition={{ duration: 0.6 }}
           >
                         
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-6 leading-tight break-words">
+            <h1 className="text-fluid-5xl font-bold mb-6 leading-tight">
               Transform Your <span className="text-gradient">Wireframes</span>
               <br />Into Production Code
             </h1>
             
-            <p className="text-lg sm:text-xl text-gray-600 mb-8 max-w-2xl mx-auto px-4">
+            <p className="text-fluid-lg text-gray-600 mb-8 max-w-3xl mx-auto">
               Draw your website on paper, in MS Paint, or any tool - snap a photo, and get clean, responsive HTML/CSS/JavaScript in seconds. No design skills required.
             </p>
 
@@ -217,30 +219,30 @@ export default function LandingPage() {
             className="mt-16 relative"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/20 via-purple-500/20 to-pink-500/20 blur-3xl -z-10" />
-            <div className="bg-white rounded-2xl shadow-2xl border overflow-hidden max-w-5xl mx-auto">
-              <div className="bg-gray-100 px-4 py-3 flex items-center gap-2">
-                <div className="flex gap-1.5">
+            <div className="bg-white rounded-2xl shadow-2xl border overflow-hidden max-w-4xl lg:max-w-5xl mx-auto w-full">
+              <div className="bg-gray-100 px-3 lg:px-4 py-2 lg:py-3 flex items-center gap-2">
+                <div className="flex gap-1.5 flex-shrink-0">
                   <div className="w-3 h-3 rounded-full bg-red-400" />
                   <div className="w-3 h-3 rounded-full bg-yellow-400" />
                   <div className="w-3 h-3 rounded-full bg-green-400" />
                 </div>
-                <div className="flex-1 text-center text-sm text-gray-500">SketchToCode Converter</div>
-              </div>
-              <div className="grid md:grid-cols-2 divide-x">
-                <div className="p-4 md:p-8 bg-gray-50">
-                  <div className="bg-white rounded-lg border-2 border-dashed border-gray-300 flex items-center justify-center min-h-[200px] md:min-h-[300px]">
-                    <div className="text-center p-4 md:p-8 max-w-full">
-                      <div className="w-16 h-16 md:w-20 md:h-20 mx-auto mb-4 bg-gray-100 rounded-xl flex items-center justify-center">
-                        <Upload className="w-8 h-8 md:w-10 md:h-10 text-gray-400" />
-                      </div>
-                      <p className="text-gray-500 font-medium text-sm md:text-base break-words">Drop your wireframe here</p>
-                      <p className="text-gray-400 text-xs md:text-sm mt-1">PNG, JPG up to 10MB</p>
-                    </div>
-                  </div>
+                <div className="flex-1 text-center min-w-0">
+                  <span className="text-xs text-gray-500 font-medium truncate">sketch-to-code-demo.html</span>
                 </div>
-                <div className="p-4 md:p-8">
-                  <div className="bg-gray-900 rounded-lg p-2 md:p-4 font-mono text-xs md:text-sm text-left overflow-hidden min-h-[200px] md:min-h-[300px]">
-                    <pre className="text-green-400">
+              </div>
+              <div className="p-3 lg:p-6 bg-gradient-to-br from-gray-50 to-indigo-50 min-h-[250px] lg:min-h-[400px] flex items-center justify-center">
+                <div className="text-center space-y-3 lg:space-y-4 w-full max-w-sm">
+                  <div className="w-12 h-12 lg:w-16 lg:h-16 mx-auto bg-gray-100 rounded-xl flex items-center justify-center">
+                    <Upload className="w-6 h-6 lg:w-8 lg:h-8 text-gray-400" />
+                  </div>
+                  <p className="text-gray-500 font-medium text-sm lg:text-base break-words px-2">Drop your wireframe here</p>
+                  <p className="text-gray-400 text-xs lg:text-sm">PNG, JPG up to 10MB</p>
+                </div>
+              </div>
+            </div>
+            <div className="p-4 md:p-8">
+              <div className="bg-gray-900 rounded-lg p-2 md:p-4 font-mono text-xs md:text-sm text-left overflow-hidden min-h-[200px] md:min-h-[300px]">
+                <pre className="text-green-400">
 {`<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -260,9 +262,7 @@ export default function LandingPage() {
   </header>
 </body>
 </html>`}
-                    </pre>
-                  </div>
-                </div>
+                </pre>
               </div>
             </div>
           </motion.div>
@@ -271,34 +271,34 @@ export default function LandingPage() {
 
       {/* Social Proof */}
       <section className="py-12 border-y bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-wrap items-center justify-center gap-8 md:gap-16 text-gray-400">
-            <div className="text-center">
-              <div className="text-3xl font-bold text-gray-900">10,000+</div>
-              <div className="text-sm">Wireframes Converted</div>
+        <div className="container mx-auto">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-16 text-center">
+            <div>
+              <div className="text-fluid-3xl font-bold text-gray-900">10,000+</div>
+              <div className="text-fluid-sm text-gray-600">Wireframes Converted</div>
             </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-gray-900">4.9/5</div>
-              <div className="text-sm">User Rating</div>
+            <div>
+              <div className="text-fluid-3xl font-bold text-gray-900">4.9/5</div>
+              <div className="text-fluid-sm text-gray-600">User Rating</div>
             </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-gray-900">&lt;30s</div>
-              <div className="text-sm">Average Conversion</div>
+            <div>
+              <div className="text-fluid-3xl font-bold text-gray-900">&lt;30s</div>
+              <div className="text-fluid-sm text-gray-600">Average Conversion</div>
             </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-gray-900">2,500+</div>
-              <div className="text-sm">Happy Developers</div>
+            <div>
+              <div className="text-fluid-3xl font-bold text-gray-900">2,500+</div>
+              <div className="text-fluid-sm text-gray-600">Happy Developers</div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section id="features" className="py-20 px-4">
+      <section id="features" className="py-20">
         <div className="container mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Everything You Need</h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <h2 className="text-fluid-4xl font-bold mb-4">Everything You Need</h2>
+            <p className="text-fluid-xl text-gray-600 max-w-3xl mx-auto">
               From sketch to production-ready code in one click
             </p>
           </div>
@@ -361,11 +361,11 @@ export default function LandingPage() {
       </section>
 
       {/* How It Works */}
-      <section id="how-it-works" className="py-20 px-4 bg-gray-50">
+      <section id="how-it-works" className="py-20 bg-gray-50">
         <div className="container mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">How It Works</h2>
-            <p className="text-xl text-gray-600">Three simple steps to production code</p>
+            <h2 className="text-fluid-4xl font-bold mb-4">How It Works</h2>
+            <p className="text-fluid-xl text-gray-600">Three simple steps to production code</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
@@ -397,7 +397,7 @@ export default function LandingPage() {
                 <div className="w-16 h-16 mx-auto mb-6 bg-gradient-to-r from-indigo-500 to-purple-500 text-white text-2xl font-bold rounded-2xl flex items-center justify-center">
                   {item.step}
                 </div>
-                <h3 className="text-xl font-semibold mb-3">{item.title}</h3>
+                <h3 className="text-fluid-xl font-semibold mb-3">{item.title}</h3>
                 <p className="text-gray-600">{item.description}</p>
               </motion.div>
             ))}
@@ -406,21 +406,21 @@ export default function LandingPage() {
       </section>
 
       {/* Pricing Section */}
-      <section id="pricing" className="py-20 px-4">
+      <section id="pricing" className="py-20">
         <div className="container mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Simple, Transparent Pricing</h2>
-            <p className="text-xl text-gray-600">Pay only for what you use. No subscriptions.</p>
+            <h2 className="text-fluid-4xl font-bold mb-4">Simple, Transparent Pricing</h2>
+            <p className="text-fluid-xl text-gray-600">Pay only for what you use. No subscriptions.</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {/* Free Tier */}
             <Card className="relative">
               <CardHeader>
-                <CardTitle className="text-2xl">Free Trial</CardTitle>
+                <CardTitle className="text-fluid-2xl">Free Trial</CardTitle>
                 <CardDescription>Try before you buy</CardDescription>
                 <div className="mt-4">
-                  <span className="text-4xl font-bold">$0</span>
+                  <span className="text-fluid-4xl font-bold">$0</span>
                 </div>
               </CardHeader>
               <CardContent>
@@ -450,10 +450,10 @@ export default function LandingPage() {
                 Most Popular
               </div>
               <CardHeader>
-                <CardTitle className="text-2xl">Starter Pack</CardTitle>
+                <CardTitle className="text-fluid-2xl">Starter Pack</CardTitle>
                 <CardDescription>Best for individuals</CardDescription>
                 <div className="mt-4">
-                  <span className="text-4xl font-bold">$25</span>
+                  <span className="text-fluid-4xl font-bold">$25</span>
                   <span className="text-gray-500 ml-2">/ 10 credits</span>
                 </div>
               </CardHeader>
@@ -485,10 +485,10 @@ export default function LandingPage() {
             {/* 100 Pack */}
             <Card className="relative">
               <CardHeader>
-                <CardTitle className="text-2xl">Agency Pack</CardTitle>
+                <CardTitle className="text-fluid-2xl">Agency Pack</CardTitle>
                 <CardDescription>Best for teams & agencies</CardDescription>
                 <div className="mt-4">
-                  <span className="text-4xl font-bold">$180</span>
+                  <span className="text-fluid-4xl font-bold">$180</span>
                   <span className="text-gray-500 ml-2">/ 100 credits</span>
                 </div>
               </CardHeader>
@@ -521,11 +521,11 @@ export default function LandingPage() {
       </section>
 
       {/* Testimonials */}
-      <section className="py-20 px-4 bg-gray-50">
+      <section className="py-20 bg-gray-50">
         <div className="container mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Loved by Developers</h2>
-            <p className="text-xl text-gray-600">See what our users are saying</p>
+            <h2 className="text-fluid-4xl font-bold mb-4">Loved by Developers</h2>
+            <p className="text-fluid-xl text-gray-600">See what our users are saying</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
@@ -566,10 +566,10 @@ export default function LandingPage() {
       </section>
 
       {/* FAQ Section */}
-      <section id="faq" className="py-20 px-4">
+      <section id="faq" className="py-20">
         <div className="container mx-auto max-w-3xl">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Frequently Asked Questions</h2>
+            <h2 className="text-fluid-4xl font-bold mb-4">Frequently Asked Questions</h2>
           </div>
 
           <Accordion type="single" collapsible className="space-y-4">
@@ -612,10 +612,10 @@ export default function LandingPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 px-4 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600">
+      <section className="py-20 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600">
         <div className="container mx-auto text-center text-white">
-          <h2 className="text-4xl font-bold mb-6">Ready to Transform Your Wireframes?</h2>
-          <p className="text-xl opacity-90 mb-8 max-w-2xl mx-auto">
+          <h2 className="text-fluid-4xl font-bold mb-6">Ready to Transform Your Wireframes?</h2>
+          <p className="text-fluid-xl opacity-90 mb-8 max-w-3xl mx-auto">
             Join thousands of developers who save hours with AI-powered wireframe conversion.
           </p>
           <Link href={isLoaded && user ? "/app" : "/sign-up"}>
@@ -629,7 +629,7 @@ export default function LandingPage() {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 px-4 border-t">
+      <footer className="py-12 border-t">
         <div className="container mx-auto">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex items-center gap-2">
