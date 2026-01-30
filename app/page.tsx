@@ -55,6 +55,7 @@ export default function LandingPage() {
             <div className="hidden md:flex items-center gap-8">
               <Link href="#features" className="text-gray-600 hover:text-gray-900 transition">Features</Link>
               <Link href="#how-it-works" className="text-gray-600 hover:text-gray-900 transition">How It Works</Link>
+              <Link href="/recognition" className="text-gray-600 hover:text-gray-900 transition">Smart Recognition</Link>
               <Link href="#pricing" className="text-gray-600 hover:text-gray-900 transition">Pricing</Link>
               <Link href="#faq" className="text-gray-600 hover:text-gray-900 transition">FAQ</Link>
             </div>
@@ -313,120 +314,6 @@ export default function LandingPage() {
               </motion.div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Smart Recognition System */}
-      <section className="py-20 px-4">
-        <div className="container mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Smart Recognition System</h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Use text labels, color coding, or both for perfect wireframe-to-code conversion
-            </p>
-          </div>
-
-          <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-            {/* Text Labels */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-            >
-              <div className="bg-white rounded-2xl p-8 shadow-lg border">
-                <div className="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mb-6">
-                  <span className="text-xl font-bold">Aa</span>
-                </div>
-                <h3 className="text-2xl font-bold mb-4">Text Labels</h3>
-                <p className="text-gray-600 mb-6">
-                  Write element names directly on your wireframe for precise control:
-                </p>
-                <div className="space-y-3">
-                  {[
-                    { label: "Header", element: "<header>", color: "text-gray-700" },
-                    { label: "Navigation", element: "<nav>", color: "text-gray-700" },
-                    { label: "Hero", element: "Hero section", color: "text-green-600" },
-                    { label: "CTA", element: "Call-to-action", color: "text-green-600" },
-                    { label: "Card", element: "Card component", color: "text-blue-600" },
-                    { label: "Button", element: "<button>", color: "text-red-600" },
-                    { label: "Form", element: "Contact form", color: "text-yellow-600" },
-                    { label: "Footer", element: "<footer>", color: "text-gray-700" }
-                  ].map((item, index) => (
-                    <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                      <span className={`font-medium ${item.color}`}>{item.label}</span>
-                      <span className="text-sm text-gray-500 font-mono">{item.element}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Color Coding */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              viewport={{ once: true }}
-            >
-              <div className="bg-white rounded-2xl p-8 shadow-lg border">
-                <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-xl flex items-center justify-center mb-6">
-                  <Palette className="w-6 h-6" />
-                </div>
-                <h3 className="text-2xl font-bold mb-4">Color Coding</h3>
-                <p className="text-gray-600 mb-6">
-                  Use colored markers or highlighters for visual organization:
-                </p>
-                <div className="space-y-3">
-                  {[
-                    { color: "bg-blue-500", label: "Blue", usage: "Cards, containers, content blocks" },
-                    { color: "bg-green-500", label: "Green", usage: "Hero sections, main CTAs" },
-                    { color: "bg-red-500", label: "Red", usage: "Buttons, important actions" },
-                    { color: "bg-orange-500", label: "Orange", usage: "Pricing tables, features" },
-                    { color: "bg-purple-500", label: "Purple", usage: "Testimonials, quotes" },
-                    { color: "bg-yellow-500", label: "Yellow", usage: "Forms, input fields" },
-                    { color: "bg-gray-500", label: "Gray", usage: "Navigation, headers, footers" },
-                    { color: "bg-teal-500", label: "Teal", usage: "Sidebars, secondary content" }
-                  ].map((item, index) => (
-                    <div key={index} className="flex items-center gap-4 p-3 bg-gray-50 rounded-lg">
-                      <div className={`w-6 h-6 ${item.color} rounded`}></div>
-                      <div className="flex-1">
-                        <span className="font-medium text-gray-700">{item.label}</span>
-                        <p className="text-sm text-gray-500">{item.usage}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          </div>
-
-          {/* Best Practices */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="mt-16 text-center"
-          >
-            <div className="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-2xl p-8 max-w-4xl mx-auto border">
-              <h3 className="text-2xl font-bold mb-4">Best Practices</h3>
-              <div className="grid md:grid-cols-3 gap-6 text-left">
-                <div>
-                  <h4 className="font-semibold text-indigo-600 mb-2">🎯 Combine Both</h4>
-                  <p className="text-gray-600 text-sm">Green box + "Subscribe" = Prominent CTA section</p>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-indigo-600 mb-2">📝 Text Takes Priority</h4>
-                  <p className="text-gray-600 text-sm">Text labels override colors for accuracy</p>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-indigo-600 mb-2">🎨 Start Simple</h4>
-                  <p className="text-gray-600 text-sm">Use colors alone for quick sketches</p>
-                </div>
-              </div>
-            </div>
-          </motion.div>
         </div>
       </section>
 
