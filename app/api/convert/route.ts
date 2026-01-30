@@ -30,7 +30,7 @@ Always respond with a valid JSON object containing:
   "html": "<!-- The body content HTML -->",
   "css": "/* Complete CSS styles */",
   "js": "// Optional JavaScript for interactivity",
-  "react": "// Complete React functional component with inline styles or Tailwind classes",
+  "react": "// Complete React functional component with inline styles",
   "structure": { /* JSON representation of the page structure */ }
 }
 
