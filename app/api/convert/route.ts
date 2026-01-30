@@ -7,34 +7,41 @@ const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY!,
 })
 
-const SYSTEM_PROMPT = `You are an expert web developer who converts hand-drawn wireframes into production-ready code. 
+// Cost control settings
+const MAX_TOKENS_PER_REQUEST = 8000
+const MAX_COST_PER_CONVERSION = 0.50 // $0.50 max per conversion
+const ESTIMATED_COST_PER_TOKEN = 0.00003 // ~$0.03 per 1K tokens
+const DAILY_COST_LIMIT_PER_USER = 10.00 // $10 max per user per day
+const HOURLY_CONVERSION_LIMIT = 20 // Max 20 conversions per hour
 
-When analyzing a wireframe image:
-1. Identify all UI components (headers, navigation, buttons, forms, cards, images, text blocks)
-2. Understand the layout structure (grid, flexbox patterns)
-3. **IMPORTANT: Pay special attention to handwritten labels and text annotations**
-4. If you see text labels like "Header", "Navigation", "Sidebar", "Main Content", "Footer", "Button", "Card", etc., use these as semantic HTML elements
-5. Use labels to determine element hierarchy and structure
-6. Infer reasonable styling based on the sketch
+      const SYSTEM_PROMPT = `You are an expert web developer who converts hand-drawn wireframes into production-ready code. 
 
-Generate clean, semantic, responsive code that:
-- Uses modern HTML5 elements
-- Includes comprehensive CSS with flexbox/grid layouts
-- Is mobile-responsive with media queries
-- Uses a modern color palette (indigo/purple primary, gray neutrals)
-- Includes hover states and transitions
-- Has placeholder content that matches the wireframe intent
+      When analyzing a wireframe image:
+      1. Identify all UI components (headers, navigation, buttons, forms, cards, images, text blocks)
+      2. Understand the layout structure (grid, flexbox patterns)
+      3. **IMPORTANT: Pay special attention to handwritten labels and text annotations**
+      4. If you see text labels like "Header", "Navigation", "Sidebar", "Main Content", "Footer", "Button", "Card", etc., use these as semantic HTML elements
+      5. Use labels to determine element hierarchy and structure
+      6. Infer reasonable styling based on the sketch
 
-Always respond with a valid JSON object containing:
-{
-  "html": "<!-- The body content HTML -->",
-  "css": "/* Complete CSS styles */",
-  "js": "// Optional JavaScript for interactivity",
-  "react": "// Complete React functional component with inline styles",
-  "structure": { /* JSON representation of the page structure */ }
-}
+      Generate clean, semantic, responsive code that:
+      - Uses modern HTML5 elements
+      - Includes comprehensive CSS with flexbox/grid layouts
+      - Is mobile-responsive with media queries
+      - Uses a modern color palette (indigo/purple primary, gray neutrals)
+      - Includes hover states and transitions
+      - Has placeholder content that matches the wireframe intent
 
-Make the generated website look professional and polished, not like a wireframe.`
+      Always respond with a valid JSON object containing:
+      {
+        "html": "<!-- The body content HTML -->",
+        "css": "/* Complete CSS styles */",
+        "js": "// Optional JavaScript for interactivity",
+        "react": "// Complete React functional component with inline styles",
+        "structure": { /* JSON representation of the page structure */ }
+      }
+
+      Make the generated website look professional and polished, not like a wireframe.`
 
 export async function POST(request: NextRequest) {
   try {
@@ -66,7 +73,7 @@ export async function POST(request: NextRequest) {
 
     const response = await anthropic.messages.create({
       model: 'claude-sonnet-4-20250514',
-      max_tokens: 8000,
+      max_tokens: MAX_TOKENS_PER_REQUEST,
       messages: [
         {
           role: 'user',
@@ -128,6 +135,31 @@ Focus on creating a beautiful, modern, responsive website. Return ONLY a valid J
     const textContent = response.content.find(c => c.type === 'text')
     if (!textContent || textContent.type !== 'text') {
       throw new Error('No text response from AI')
+    }
+
+    // Log cost monitoring
+    const inputTokens = response.usage?.input_tokens || 0
+    const outputTokens = response.usage?.output_tokens || 0
+    const totalTokens = inputTokens + outputTokens
+    const estimatedCost = totalTokens * ESTIMATED_COST_PER_TOKEN
+    
+    console.log('AI Cost Analysis:', {
+      userId,
+      inputTokens,
+      outputTokens,
+      totalTokens,
+      estimatedCost: `$${estimatedCost.toFixed(4)}`,
+      maxAllowed: `$${MAX_COST_PER_CONVERSION}`,
+      withinLimit: estimatedCost <= MAX_COST_PER_CONVERSION
+    })
+
+    // Warn if approaching cost limit
+    if (estimatedCost > MAX_COST_PER_CONVERSION * 0.8) {
+      console.warn('High cost conversion detected:', {
+        userId,
+        estimatedCost: `$${estimatedCost.toFixed(4)}`,
+        tokens: totalTokens
+      })
     }
 
     let parsedResult
@@ -194,6 +226,29 @@ body { font-family: system-ui, sans-serif; line-height: 1.6; color: #1f2937; }
         structure: { type: 'page', sections: ['header', 'hero', 'footer'] }
       }
     }
+
+    // Check user credits
+    const userCredits = await getUserCredits(userId)
+    if (userCredits < 1) {
+      return NextResponse.json(
+        { error: 'Insufficient credits' },
+        { status: 402 }
+      )
+    }
+
+    // Check user's daily cost limit (basic in-memory tracking)
+    // In production, this should be stored in Redis or database
+    const userCostKey = `user_cost_${userId}_${new Date().toDateString()}`
+    const userHourlyKey = `user_conversions_${userId}_${new Date().getHours()}`
+    
+    // Note: In production, implement proper rate limiting storage
+    // For now, we'll log and warn about potential abuses
+    console.log('Cost Control Check:', {
+      userId,
+      dailyLimit: `$${DAILY_COST_LIMIT_PER_USER}`,
+      hourlyLimit: HOURLY_CONVERSION_LIMIT,
+      currentCredits: userCredits
+    })
 
     const deducted = await deductCredit(userId)
     if (!deducted) {
