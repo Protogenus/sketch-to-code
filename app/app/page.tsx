@@ -45,6 +45,8 @@ export default function ConverterApp() {
   const { user, isLoaded } = useUser()
   const { toast } = useToast()
   
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  
   const [uploadedImage, setUploadedImage] = useState<string | null>(null)
   const [imageFile, setImageFile] = useState<File | null>(null)
   const [isConverting, setIsConverting] = useState(false)
@@ -231,15 +233,37 @@ ${result.js}
       <header className="bg-white border-b sticky top-0 z-50">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
-            <Link href="/" className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg flex items-center justify-center">
-                <Code className="w-5 h-5 text-white" />
+            <div className="flex items-center gap-8">
+              <Link href="/" className="flex items-center gap-2">
+                <div className="w-8 h-8 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg flex items-center justify-center">
+                  <Code className="w-5 h-5 text-white" />
+                </div>
+                <span className="font-bold text-xl">SketchToCode</span>
+              </Link>
+
+              <div className="hidden md:flex items-center gap-8">
+                <Link href="/#features" className="text-gray-600 hover:text-gray-900 transition">Features</Link>
+                <Link href="/#how-it-works" className="text-gray-600 hover:text-gray-900 transition">How It Works</Link>
+                <Link href="/recognition" className="text-indigo-600 hover:text-indigo-700 transition font-medium">Smart Recognition</Link>
+                <Link href="/#pricing" className="text-gray-600 hover:text-gray-900 transition">Pricing</Link>
+                <Link href="/#faq" className="text-gray-600 hover:text-gray-900 transition">FAQ</Link>
               </div>
-              <span className="font-bold text-xl">SketchToCode</span>
-            </Link>
+            </div>
 
             <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2 bg-indigo-50 px-4 py-2 rounded-full">
+              {/* Mobile Menu Button */}
+              <button
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="md:hidden relative w-10 h-10 flex items-center justify-center rounded-xl bg-gradient-to-br from-indigo-50 to-purple-50 border border-indigo-200 hover:from-indigo-100 hover:to-purple-100 transition-all"
+              >
+                <div className="w-6 h-5 flex flex-col justify-center items-center gap-1.5">
+                  <div className={`w-full h-0.5 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full transition-all duration-300 ${isMenuOpen ? 'rotate-45 translate-y-2' : ''}`}></div>
+                  <div className={`w-full h-0.5 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full transition-all duration-300 ${isMenuOpen ? 'opacity-0' : ''}`}></div>
+                  <div className={`w-full h-0.5 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full transition-all duration-300 ${isMenuOpen ? '-rotate-45 -translate-y-2' : ''}`}></div>
+                </div>
+              </button>
+
+              <div className="hidden md:flex items-center gap-2 bg-indigo-50 px-4 py-2 rounded-full">
                 <Sparkles className="w-4 h-4 text-indigo-600" />
                 <span className="font-medium text-indigo-600">{credits} credits</span>
               </div>
@@ -290,6 +314,64 @@ ${result.js}
           </div>
         </div>
       </header>
+
+      {/* Mobile Menu */}
+      <motion.div
+        initial={{ opacity: 0, height: 0 }}
+        animate={{ 
+          opacity: isMenuOpen ? 1 : 0,
+          height: isMenuOpen ? 'auto' : 0
+        }}
+        transition={{ duration: 0.3 }}
+        className="md:hidden bg-white border-b overflow-hidden"
+      >
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex flex-col space-y-2">
+            <Link 
+              href="/#features" 
+              className="text-gray-600 hover:text-gray-900 transition py-2 px-4 rounded-lg hover:bg-gray-50"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Features
+            </Link>
+            <Link 
+              href="/#how-it-works" 
+              className="text-gray-600 hover:text-gray-900 transition py-2 px-4 rounded-lg hover:bg-gray-50"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              How It Works
+            </Link>
+            <Link 
+              href="/recognition" 
+              className="text-indigo-600 hover:text-indigo-700 transition py-2 px-4 rounded-lg hover:bg-indigo-50 font-medium"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Smart Recognition
+            </Link>
+            <Link 
+              href="/#pricing" 
+              className="text-gray-600 hover:text-gray-900 transition py-2 px-4 rounded-lg hover:bg-gray-50"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Pricing
+            </Link>
+            <Link 
+              href="/#faq" 
+              className="text-gray-600 hover:text-gray-900 transition py-2 px-4 rounded-lg hover:bg-gray-50"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              FAQ
+            </Link>
+          </div>
+          
+          <div className="flex flex-col space-y-3 pt-4 border-t">
+            <div className="flex items-center gap-2 bg-indigo-50 px-4 py-2 rounded-full">
+              <Sparkles className="w-4 h-4 text-indigo-600" />
+              <span className="font-medium text-indigo-600">{credits} credits</span>
+            </div>
+          </div>
+        </div>
+      </motion.div>
 
       {/* Main Content */}
       <main className="container mx-auto px-4 py-8">
