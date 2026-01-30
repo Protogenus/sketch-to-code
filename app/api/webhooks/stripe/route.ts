@@ -43,12 +43,16 @@ export async function POST(request: NextRequest) {
     }
 
     try {
+      console.log('Creating or finding user:', { clerkUserId, email: session.customer_email })
       await getOrCreateUser(clerkUserId, session.customer_email || '')
       
+      console.log('Adding credits:', { clerkUserId, credits })
       const success = await addCredits(clerkUserId, credits)
       
       if (!success) {
         console.error('Failed to add credits for user:', clerkUserId)
+      } else {
+        console.log('Successfully added credits:', { clerkUserId, credits })
       }
 
       await supabaseAdmin.from('purchases').insert({
