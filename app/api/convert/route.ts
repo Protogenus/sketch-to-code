@@ -2,6 +2,7 @@ import { auth } from '@clerk/nextjs/server'
 import { NextRequest, NextResponse } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
 import { getUserCredits, deductCredit, saveConversion } from '@/lib/supabase'
+import { analyzeCodeQuality } from '@/lib/codeQuality'
 
 const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY!,
@@ -258,6 +259,21 @@ body { font-family: system-ui, sans-serif; line-height: 1.6; color: #1f2937; }
       )
     }
 
+    // Analyze code quality
+    const qualityScore = analyzeCodeQuality(
+      parsedResult.html || '',
+      parsedResult.css || '',
+      parsedResult.js || ''
+    )
+
+    console.log('Code Quality Analysis:', {
+      userId,
+      overall: qualityScore.overall,
+      grade: qualityScore.grade,
+      issues: qualityScore.issues.length,
+      suggestions: qualityScore.suggestions.length
+    })
+
     await saveConversion(
       userId,
       `data:image/jpeg;base64,${image.substring(0, 100)}...`,
@@ -271,6 +287,7 @@ body { font-family: system-ui, sans-serif; line-height: 1.6; color: #1f2937; }
       js: parsedResult.js || '',
       react: parsedResult.react,
       json: parsedResult.structure || parsedResult,
+      qualityScore: qualityScore
     })
   } catch (error: any) {
     console.error('Conversion error:', error)

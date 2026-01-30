@@ -22,12 +22,14 @@ import {
   Sparkles
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Progress } from '@/components/ui/progress'
-import { useToast } from '@/components/ui/use-toast'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from '@/components/ui/dropdown-menu'
-import { fileToBase64, downloadFile, copyToClipboard } from '@/lib/utils'
+import { useToast } from '@/hooks/use-toast'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
+import { formatPrice } from '@/lib/utils'
+import { getConversions, downloadFile, copyToClipboard } from '@/lib/conversions'
+import { QualityScoreDisplay } from '@/components/ui/quality-score'
 import Link from 'next/link'
 
 type ExportFormat = 'html' | 'react' | 'json'
@@ -38,6 +40,20 @@ interface ConversionResult {
   js: string
   react: string
   json: object
+  qualityScore?: {
+    overall: number
+    breakdown: {
+      semantics: number
+      structure: number
+      styling: number
+      responsiveness: number
+      accessibility: number
+      bestPractices: number
+    }
+    issues: string[]
+    suggestions: string[]
+    grade: 'A' | 'B' | 'C' | 'D' | 'F'
+  }
 }
 
 export default function ConverterApp() {
@@ -476,6 +492,13 @@ ${result.js}
                         title="Preview"
                       />
                     </div>
+                    
+                    {/* Quality Score Display */}
+                    {result.qualityScore && (
+                      <div className="mt-6">
+                        <QualityScoreDisplay score={result.qualityScore} />
+                      </div>
+                    )}
                   </TabsContent>
 
                   <TabsContent value="html" className="mt-4">
