@@ -102,13 +102,20 @@ export async function POST(request: NextRequest) {
 - **Content:** "Article"/Blue → <article>, "Form"/Yellow → contact form, "Grid"/Blue → grid container, "Card"/Blue → card components
 - **UI:** "Button"/Red → <button>, "Modal"/Blue → modal dialog, "Accordion"/Blue → collapsible content, "Tabs"/Gray → tab navigation, "Carousel"/Blue → image slider, "Dropdown"/Gray → dropdown menu
 
-**Priority System:**
-1. **Text labels take priority** over colors (if someone writes "Header" in red, it's still a header)
-2. **Colors work best for unlabeled elements** (blue box without text = card)
-3. **Conflicts resolved by text** (text labels override color suggestions)
-4. **When in doubt, use text labels** for clarity
+**Smart Combination System:**
+1. **Text labels define the element type** (Button, Header, Card, etc.)
+2. **Colors suggest styling/layout context** (Green = prominent, Blue = standard, Red = action)
+3. **Colors enhance text labels** (Green + "Subscribe" → prominent CTA section)
+4. **Colors alone create basic elements** (blue box = generic card)
+5. **Conflicts resolved intelligently** (text wins, but color influences styling)
 
-**Important:** All generated code must work as standalone HTML/CSS/JS files without backend dependencies. Use text labels for important elements, colors for quick visual organization.
+**Example Combinations:**
+- Green box + "Subscribe" → Prominent CTA section with subscribe form
+- Blue box + "Pricing" → Standard pricing table layout
+- Red box + "Button" → Action-styled button
+- Purple box + "Testimonial" → Emphasized testimonial card
+
+**Important:** All generated code must work as standalone HTML/CSS/JS files without backend dependencies. Use text labels for specific elements, colors for visual hierarchy and styling context.
 
 Focus on creating a beautiful, modern, responsive website. Return ONLY a valid JSON object with html, css, js, react, and structure fields.`,
             },
