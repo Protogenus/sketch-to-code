@@ -39,7 +39,6 @@ export default function LandingPage() {
   const { user, isLoaded } = useUser()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
-  // Close menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as HTMLElement
