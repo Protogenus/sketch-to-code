@@ -319,7 +319,11 @@ ${result.js}
                     {isDragActive ? 'Drop your wireframe here' : 'Drag & drop your wireframe'}
                   </p>
                   <p className="text-gray-500 mb-4">or click to browse</p>
-                  <p className="text-sm text-gray-400">PNG, JPG up to 10MB</p>
+                  <p className="text-sm text-gray-400 mb-2">PNG, JPG up to 10MB</p>
+                  <div className="bg-indigo-50 rounded-lg p-3 text-sm text-indigo-700">
+                    <p className="font-medium mb-1">💡 Pro tip:</p>
+                    <p>Label elements like "Header", "Navigation", "Main Content", "Footer" for better results!</p>
+                  </div>
                 </div>
               ) : (
                 <div className="relative">

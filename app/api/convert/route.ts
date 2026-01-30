@@ -12,8 +12,10 @@ const SYSTEM_PROMPT = `You are an expert web developer who converts hand-drawn w
 When analyzing a wireframe image:
 1. Identify all UI components (headers, navigation, buttons, forms, cards, images, text blocks)
 2. Understand the layout structure (grid, flexbox patterns)
-3. Interpret annotations and labels
-4. Infer reasonable styling based on the sketch
+3. **IMPORTANT: Pay special attention to handwritten labels and text annotations**
+4. If you see text labels like "Header", "Navigation", "Sidebar", "Main Content", "Footer", "Button", "Card", etc., use these as semantic HTML elements
+5. Use labels to determine element hierarchy and structure
+6. Infer reasonable styling based on the sketch
 
 Generate clean, semantic, responsive code that:
 - Uses modern HTML5 elements
@@ -79,7 +81,19 @@ export async function POST(request: NextRequest) {
             },
             {
               type: 'text',
-              text: `Convert this wireframe to production-ready code. Focus on creating a beautiful, modern, responsive website. Return ONLY a valid JSON object with html, css, js, react, and structure fields.`,
+              text: `Convert this wireframe to production-ready code. 
+
+**IMPORTANT INSTRUCTIONS:**
+- Look for handwritten labels like "Header", "Navigation", "Sidebar", "Main Content", "Footer", "Button", "Card", etc.
+- Use these labels to create semantic HTML elements (header, nav, aside, main, footer, button, etc.)
+- If you see "Header" text, create a <header> element
+- If you see "Navigation" or "Nav", create a <nav> element  
+- If you see "Sidebar", create an <aside> element
+- If you see "Main Content", create a <main> element
+- If you see "Footer", create a <footer> element
+- Use the labels to understand the layout structure
+
+Focus on creating a beautiful, modern, responsive website. Return ONLY a valid JSON object with html, css, js, react, and structure fields.`,
             },
           ],
         },
