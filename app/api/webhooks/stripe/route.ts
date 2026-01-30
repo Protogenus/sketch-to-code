@@ -27,12 +27,18 @@ export async function POST(request: NextRequest) {
   if (event.type === 'checkout.session.completed') {
     const session = event.data.object as Stripe.Checkout.Session
     
+    console.log('Webhook received checkout.session.completed:', {
+      sessionId: session.id,
+      metadata: session.metadata,
+      customerEmail: session.customer_email
+    })
+    
     const clerkUserId = session.metadata?.clerkUserId
     const credits = parseInt(session.metadata?.credits || '0', 10)
     const packId = session.metadata?.packId
 
     if (!clerkUserId || !credits) {
-      console.error('Missing metadata in checkout session')
+      console.error('Missing metadata in checkout session:', { clerkUserId, credits, metadata: session.metadata })
       return NextResponse.json({ received: true })
     }
 
