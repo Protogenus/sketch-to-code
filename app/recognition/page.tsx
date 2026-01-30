@@ -56,6 +56,9 @@ export default function RecognitionPage() {
               <Link href="/recognition" className="text-indigo-600 hover:text-indigo-700 transition font-medium">Smart Recognition</Link>
               <Link href="/#pricing" className="text-gray-600 hover:text-gray-900 transition">Pricing</Link>
               <Link href="/#faq" className="text-gray-600 hover:text-gray-900 transition">FAQ</Link>
+            </div>
+
+            <div className="hidden md:flex items-center gap-4">
               <Link href="/app">
                 <Button variant="gradient">Go to App</Button>
               </Link>
