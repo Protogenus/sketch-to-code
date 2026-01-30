@@ -95,7 +95,7 @@ export default function LandingPage() {
             </h1>
             
             <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-              Draw your website on paper, snap a photo, and get clean, responsive HTML/CSS/JavaScript in seconds. No design skills required.
+              Draw your website on paper, in MS Paint, or any tool - snap a photo, and get clean, responsive HTML/CSS/JavaScript in seconds. No design skills required.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">

@@ -103,7 +103,7 @@ export default function RecognitionPage() {
                         Basic Wireframe with Text Labels
                       </CardTitle>
                       <CardDescription>
-                        Simple wireframe showing how text labels guide the AI
+                        Simple wireframe showing how text labels guide the AI (works with paper, MS Paint, or any tool)
                       </CardDescription>
                     </CardHeader>
                     <CardContent>
@@ -454,6 +454,94 @@ export default function RecognitionPage() {
         </div>
       </section>
 
+      {/* Drawing Tools Section */}
+      <section className="py-20 px-4 bg-gray-50">
+        <div className="container mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-4">Draw Anywhere, Convert Everywhere</h2>
+            <p className="text-xl text-gray-600">Use any tool you're comfortable with - our AI understands them all</p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+            {[
+              {
+                icon: "✏️",
+                title: "Paper & Pen",
+                description: "Traditional sketching with pen, pencil, or markers. Perfect for quick ideas.",
+                examples: ["Notebook", "Whiteboard", "Sticky notes"]
+              },
+              {
+                icon: "🎨",
+                title: "MS Paint",
+                description: "Simple, accessible tool everyone has. Great for basic shapes and text.",
+                examples: ["Rectangles", "Text tool", "Fill colors"]
+              },
+              {
+                icon: "💻",
+                title: "Design Tools",
+                description: "Any digital drawing app works perfectly with our smart recognition.",
+                examples: ["Figma", "Sketch", "Photoshop"]
+              },
+              {
+                icon: "📱",
+                title: "Mobile Apps",
+                description: "Draw on your phone or tablet with any sketching app.",
+                examples: ["Procreate", "Paper", "Sketchbook"]
+              }
+            ].map((tool, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <Card className="h-full text-center">
+                  <CardHeader>
+                    <div className="text-4xl mb-4">{tool.icon}</div>
+                    <CardTitle>{tool.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <CardDescription className="mb-4">{tool.description}</CardDescription>
+                    <div className="space-y-1">
+                      {tool.examples.map((example, i) => (
+                        <div key={i} className="text-sm text-gray-600">{example}</div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            viewport={{ once: true }}
+            className="mt-16 text-center"
+          >
+            <div className="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-2xl p-8 max-w-4xl mx-auto border">
+              <h3 className="text-2xl font-bold mb-4">Why MS Paint Works Great</h3>
+              <div className="grid md:grid-cols-3 gap-6 text-left">
+                <div>
+                  <h4 className="font-semibold text-indigo-600 mb-2">🎯 Simple Shapes</h4>
+                  <p className="text-gray-600 text-sm">Perfect rectangles and lines make clean wireframes</p>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-indigo-600 mb-2">📝 Easy Text</h4>
+                  <p className="text-gray-600 text-sm">Text tool makes labeling elements straightforward</p>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-indigo-600 mb-2">🎨 Color Fill</h4>
+                  <p className="text-gray-600 text-sm">Fill tool perfect for our color coding system</p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Quick Reference */}
       <section className="py-20 px-4">
         <div className="container mx-auto">
@@ -543,7 +631,7 @@ export default function RecognitionPage() {
         <div className="container mx-auto text-center text-white">
           <h2 className="text-4xl font-bold mb-6">Ready to Try It Out?</h2>
           <p className="text-xl opacity-90 mb-8 max-w-2xl mx-auto">
-            Upload your wireframe and see the Smart Recognition System in action
+            Draw your website on paper, in MS Paint, or any tool - snap a photo, and get clean, responsive HTML/CSS/JavaScript in seconds.
           </p>
           <Link href="/app">
             <Button size="xl" className="bg-white text-indigo-600 hover:bg-gray-100 gap-2">
