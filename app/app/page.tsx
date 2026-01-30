@@ -322,7 +322,7 @@ ${result.js}
                   <p className="text-sm text-gray-400 mb-2">PNG, JPG up to 10MB</p>
                   <div className="bg-indigo-50 rounded-lg p-3 text-sm text-indigo-700">
                     <p className="font-medium mb-1">💡 Pro tip:</p>
-                    <p>Label elements like "Header", "Navigation", "Main Content", "Footer" for better results!</p>
+                    <p>Label elements for better results! Basic: Header, Nav, Main, Footer. Advanced: Hero, CTA, Pricing, Features, Testimonial, Form, Modal, Tabs, etc.</p>
                   </div>
                 </div>
               ) : (
