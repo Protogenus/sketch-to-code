@@ -88,11 +88,7 @@ export default function LandingPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <div className="inline-flex items-center gap-2 bg-indigo-50 text-indigo-700 px-4 py-2 rounded-full text-sm font-medium mb-6">
-              <Sparkles className="w-4 h-4" />
-              Powered by Claude AI Vision
-            </div>
-            
+                        
             <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
               Transform Your <span className="text-gradient">Wireframes</span>
               <br />Into Production Code
@@ -220,7 +216,7 @@ export default function LandingPage() {
               {
                 icon: <Zap className="w-6 h-6" />,
                 title: "AI-Powered Analysis",
-                description: "Claude AI understands your hand-drawn wireframes with incredible accuracy, interpreting layouts, components, and structure."
+                description: "Advanced AI understands your hand-drawn wireframes with incredible accuracy, interpreting layouts, components, and structure."
               },
               {
                 icon: <Code className="w-6 h-6" />,

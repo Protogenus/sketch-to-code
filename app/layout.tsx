@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'SketchToCode - Transform Wireframes into Production Code',
-  description: 'Upload a photo of your hand-drawn wireframe and get production-ready HTML, CSS, and JavaScript code instantly. Powered by AI.',
+  description: 'Upload a photo of your hand-drawn wireframe and get production-ready HTML, CSS, and JavaScript code instantly. Transform your designs into code.',
   keywords: ['wireframe', 'code generator', 'AI', 'web development', 'design to code'],
   openGraph: {
     title: 'SketchToCode - Transform Wireframes into Production Code',

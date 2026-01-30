@@ -6,7 +6,7 @@ Transform hand-drawn wireframes into production-ready code using AI vision techn
 
 ## Features
 
-- **AI-Powered Analysis** - Claude AI interprets hand-drawn wireframes with high accuracy
+- **AI-Powered Analysis** - Advanced AI interprets hand-drawn wireframes with high accuracy
 - **Multiple Export Formats** - HTML/CSS, React JSX, JSON structure
 - **Live Preview** - See your generated website instantly
 - **Responsive Output** - All generated code is mobile-first
@@ -23,7 +23,7 @@ Transform hand-drawn wireframes into production-ready code using AI vision techn
 | Authentication | Clerk |
 | Database | Supabase (PostgreSQL) |
 | Payments | Stripe |
-| AI | Anthropic Claude API |
+| AI | Anthropic API |
 | Hosting | Vercel |
 
 ## Quick Start
@@ -59,7 +59,7 @@ NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJ...
 SUPABASE_SERVICE_ROLE_KEY=eyJ...
 
-# Anthropic Claude API
+# Anthropic API
 ANTHROPIC_API_KEY=sk-ant-...
 
 # Stripe
@@ -126,7 +126,7 @@ Open [http://localhost:3000](http://localhost:3000)
 
 | Component | Cost |
 |-----------|------|
-| Claude API (image + response) | ~$0.15-0.25 |
+| AI API (image + response) | ~$0.15-0.25 |
 | **Total per conversion** | **~$0.25** |
 
 ### Pricing Strategy
@@ -244,7 +244,7 @@ Use Stripe test cards:
 - Verify URL and keys are correct
 - Check if RLS policies allow access
 
-**Claude API errors**
+**AI API errors**
 - Verify API key is valid
 - Check rate limits
 
