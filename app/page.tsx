@@ -39,13 +39,6 @@ export default function LandingPage() {
   const { user, isLoaded } = useUser()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
-  // Version check - remove this after confirming deployment
-  useEffect(() => {
-    console.log('�🔥🔥 VERSION 3.0.0 - DEPLOYMENT TEST 🔥🔥🔥')
-    console.log('Smart Recognition should be PUBLIC now')
-    console.log('Navigation should be CONSISTENT across pages')
-  }, [])
-
   // Close menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {

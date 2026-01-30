@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
+import { useUser } from '@clerk/nextjs'
 import { Upload, Download, Copy, Check, Palette, Type, Zap, Code } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -15,6 +16,7 @@ const fadeInUp = {
 }
 
 export default function RecognitionPage() {
+  const { user, isLoaded } = useUser()
   const [copied, setCopied] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
@@ -71,9 +73,20 @@ export default function RecognitionPage() {
                 </div>
               </button>
 
-              <Link href="/app" className="hidden md:block">
-                <Button variant="gradient">Go to App</Button>
-              </Link>
+              {isLoaded && user ? (
+                <Link href="/app" className="hidden md:block">
+                  <Button variant="gradient">Go to App</Button>
+                </Link>
+              ) : (
+                <>
+                  <Link href="/sign-in" className="hidden md:block">
+                    <Button variant="ghost">Sign In</Button>
+                  </Link>
+                  <Link href="/sign-up" className="hidden md:block">
+                    <Button variant="gradient">Get Started Free</Button>
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         </div>
@@ -129,9 +142,20 @@ export default function RecognitionPage() {
           </div>
           
           <div className="flex flex-col space-y-3 pt-4 border-t">
-            <Link href="/app" onClick={() => setIsMenuOpen(false)}>
-              <Button variant="gradient" className="w-full">Go to App</Button>
-            </Link>
+            {isLoaded && user ? (
+              <Link href="/app" onClick={() => setIsMenuOpen(false)}>
+                <Button variant="gradient" className="w-full">Go to App</Button>
+              </Link>
+            ) : (
+              <>
+                <Link href="/sign-in" onClick={() => setIsMenuOpen(false)}>
+                  <Button variant="ghost" className="w-full">Sign In</Button>
+                </Link>
+                <Link href="/sign-up" onClick={() => setIsMenuOpen(false)}>
+                  <Button variant="gradient" className="w-full">Get Started Free</Button>
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </motion.div>
