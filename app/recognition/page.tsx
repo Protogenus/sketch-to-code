@@ -125,18 +125,26 @@ export default function RecognitionPage() {
                       </div>
                       <div className="space-y-2">
                         <h4 className="font-semibold">What the AI Creates:</h4>
-                        <div className="bg-gray-900 text-green-400 p-4 rounded-lg text-sm font-mono">
-                          <pre>{`<header>
-  <nav>Navigation</nav>
-</header>
-<main>
-  <section class="hero">
-    <h1>Hero Content</h1>
-  </section>
-</main>
-<footer>
-  <p>Footer Content</p>
-</footer>`}</pre>
+                        <div className="bg-white border-2 border-gray-200 rounded-lg p-6">
+                          <div className="space-y-4">
+                            <div className="bg-gray-100 p-4 rounded border">
+                              <div className="flex justify-between items-center">
+                                <span className="font-bold text-lg">Logo</span>
+                                <div className="flex gap-4 text-sm">
+                                  <span>Home</span>
+                                  <span>About</span>
+                                  <span>Contact</span>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="bg-indigo-50 p-8 rounded border text-center">
+                              <h2 className="text-2xl font-bold text-indigo-600 mb-2">Hero Content</h2>
+                              <p className="text-gray-600">Your main message goes here</p>
+                            </div>
+                            <div className="bg-gray-100 p-4 rounded border text-center text-sm text-gray-600">
+                              <p>Footer Content © 2024</p>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </CardContent>
@@ -190,20 +198,43 @@ export default function RecognitionPage() {
                       </div>
                       <div className="space-y-2">
                         <h4 className="font-semibold">Generated Structure:</h4>
-                        <div className="bg-gray-900 text-green-400 p-4 rounded-lg text-sm font-mono">
-                          <pre>{`<header>
-  <nav>Navigation</nav>
-</header>
-<div class="layout">
-  <aside>Sidebar</aside>
-  <main>Main Content</main>
-</div>
-<section class="cards">
-  <div class="card">Card 1</div>
-  <div class="card">Card 2</div>
-  <div class="card">Card 3</div>
-</section>
-<footer>Footer</footer>`}</pre>
+                        <div className="bg-white border-2 border-gray-200 rounded-lg p-6">
+                          <div className="space-y-4">
+                            <div className="bg-gray-100 p-4 rounded border">
+                              <div className="flex justify-between items-center">
+                                <span className="font-bold text-lg">Logo</span>
+                                <div className="flex gap-4 text-sm">
+                                  <span>Home</span>
+                                  <span>About</span>
+                                  <span>Contact</span>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="grid grid-cols-4 gap-4">
+                              <div className="bg-blue-50 p-4 rounded border text-center">
+                                <div className="text-xs font-bold text-blue-600 mb-2">Sidebar</div>
+                                <div className="text-xs text-gray-500">Menu items</div>
+                              </div>
+                              <div className="bg-gray-50 p-4 rounded border text-center col-span-3">
+                                <div className="text-xs font-bold text-gray-700 mb-2">Main Content</div>
+                                <div className="text-xs text-gray-500">Primary content area</div>
+                              </div>
+                            </div>
+                            <div className="grid grid-cols-3 gap-2">
+                              <div className="bg-white p-3 rounded border text-center shadow-sm">
+                                <div className="text-xs font-bold text-gray-700">Card 1</div>
+                              </div>
+                              <div className="bg-white p-3 rounded border text-center shadow-sm">
+                                <div className="text-xs font-bold text-gray-700">Card 2</div>
+                              </div>
+                              <div className="bg-white p-3 rounded border text-center shadow-sm">
+                                <div className="text-xs font-bold text-gray-700">Card 3</div>
+                              </div>
+                            </div>
+                            <div className="bg-gray-100 p-4 rounded border text-center text-sm text-gray-600">
+                              <p>Footer Content © 2024</p>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </CardContent>
@@ -253,23 +284,41 @@ export default function RecognitionPage() {
                         </div>
                       </div>
                       <div className="space-y-2">
-                        <h4 className="font-semibold">AI Interpretation:</h4>
-                        <div className="space-y-2 text-sm">
-                          <div className="flex items-center gap-2">
-                            <div className="w-4 h-4 bg-gray-500 rounded"></div>
-                            <span>Gray → Navigation/Header elements</span>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <div className="w-4 h-4 bg-green-500 rounded"></div>
-                            <span>Green → Hero section, prominent content</span>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <div className="w-4 h-4 bg-blue-500 rounded"></div>
-                            <span>Blue → Cards, containers</span>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <div className="w-4 h-4 bg-red-500 rounded"></div>
-                            <span>Red → Buttons, actions</span>
+                        <h4 className="font-semibold">AI Creates:</h4>
+                        <div className="bg-white border-2 border-gray-200 rounded-lg p-6">
+                          <div className="space-y-4">
+                            <div className="bg-gray-200 p-4 rounded border">
+                              <div className="flex justify-between items-center">
+                                <span className="font-bold text-lg">Logo</span>
+                                <div className="flex gap-4 text-sm">
+                                  <span>Home</span>
+                                  <span>About</span>
+                                  <span>Contact</span>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="bg-green-100 p-8 rounded border text-center">
+                              <h2 className="text-2xl font-bold text-green-600 mb-2">Hero Section</h2>
+                              <p className="text-gray-600 mb-4">Main call-to-action content</p>
+                              <div className="bg-white p-3 rounded border inline-block">
+                                <span className="text-green-600 font-medium">Learn More</span>
+                              </div>
+                            </div>
+                            <div className="grid grid-cols-2 gap-4">
+                              <div className="bg-blue-50 p-6 rounded border text-center">
+                                <div className="text-sm font-bold text-blue-600 mb-2">Card</div>
+                                <div className="text-xs text-gray-500">Content area</div>
+                              </div>
+                              <div className="bg-blue-50 p-6 rounded border text-center">
+                                <div className="text-sm font-bold text-blue-600 mb-2">Card</div>
+                                <div className="text-xs text-gray-500">Content area</div>
+                              </div>
+                            </div>
+                            <div className="text-center">
+                              <div className="bg-red-500 text-white px-6 py-3 rounded-lg inline-block">
+                                <span className="font-medium">Button</span>
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -313,22 +362,50 @@ export default function RecognitionPage() {
                         </div>
                       </div>
                       <div className="space-y-2">
-                        <h4 className="font-semibold">Generated Elements:</h4>
-                        <div className="bg-gray-900 text-green-400 p-4 rounded-lg text-sm font-mono">
-                          <pre>{`<header>Navigation</header>
-<section class="hero">
-  <h1>Hero CTA</h1>
-  <button>Get Started</button>
-</section>
-<section class="pricing">
-  <div class="pricing-table">Pricing</div>
-</section>
-<section class="testimonial">
-  <blockquote>Testimonial</blockquote>
-</section>
-<section class="contact">
-  <form>Contact Form</form>
-</section>`}</pre>
+                        <h4 className="font-semibold">Generated Website:</h4>
+                        <div className="bg-white border-2 border-gray-200 rounded-lg p-6">
+                          <div className="space-y-4">
+                            <div className="bg-gray-200 p-4 rounded border">
+                              <div className="flex justify-between items-center">
+                                <span className="font-bold text-lg">Logo</span>
+                                <div className="flex gap-4 text-sm">
+                                  <span>Home</span>
+                                  <span>Pricing</span>
+                                  <span>Contact</span>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="bg-green-100 p-8 rounded border text-center">
+                              <h2 className="text-2xl font-bold text-green-600 mb-2">Hero CTA</h2>
+                              <p className="text-gray-600 mb-4">Main call-to-action message</p>
+                              <div className="bg-green-600 text-white px-6 py-3 rounded-lg inline-block">
+                                <span className="font-medium">Get Started</span>
+                              </div>
+                            </div>
+                            <div className="bg-orange-100 p-6 rounded border text-center">
+                              <h3 className="text-lg font-bold text-orange-600 mb-3">Pricing</h3>
+                              <div className="bg-white p-4 rounded border">
+                                <div className="text-sm font-medium">$29/mo</div>
+                                <div className="text-xs text-gray-500">Premium plan</div>
+                              </div>
+                            </div>
+                            <div className="bg-purple-100 p-6 rounded border text-center">
+                              <h3 className="text-lg font-bold text-purple-600 mb-3">Testimonial</h3>
+                              <div className="bg-white p-4 rounded border">
+                                <div className="text-sm italic text-gray-600">"Great service!"</div>
+                                <div className="text-xs text-gray-500 mt-2">- Happy Customer</div>
+                              </div>
+                            </div>
+                            <div className="bg-yellow-100 p-6 rounded border text-center">
+                              <h3 className="text-lg font-bold text-yellow-600 mb-3">Contact Form</h3>
+                              <div className="bg-white p-3 rounded border mb-2">
+                                <div className="text-xs text-gray-500">Email address</div>
+                              </div>
+                              <div className="bg-yellow-600 text-white px-4 py-2 rounded text-sm">
+                                <span>Submit</span>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </CardContent>
@@ -371,19 +448,19 @@ export default function RecognitionPage() {
                         </div>
                         <div>
                           <h4 className="font-semibold mb-4">AI Creates:</h4>
-                          <div className="bg-gray-900 text-green-400 p-4 rounded-lg text-sm font-mono">
-                            <pre>{`<section class="cta-section">
-  <div class="container">
-    <h2>Subscribe</h2>
-    <p>Get updates</p>
-    <form class="subscribe-form">
-      <input type="email" placeholder="Enter email">
-      <button type="submit" class="cta-button">
-        Subscribe Now
-      </button>
-    </form>
-  </div>
-</section>`}</pre>
+                          <div className="bg-white border-2 border-gray-200 rounded-lg p-6">
+                            <div className="bg-gradient-to-r from-green-50 to-emerald-50 p-8 rounded border text-center">
+                              <h2 className="text-3xl font-bold text-green-600 mb-4">Subscribe</h2>
+                              <p className="text-gray-600 mb-6">Get updates delivered to your inbox</p>
+                              <div className="max-w-md mx-auto">
+                                <div className="bg-white p-4 rounded border mb-4">
+                                  <div className="text-sm text-gray-500">Enter email address</div>
+                                </div>
+                                <div className="bg-green-600 text-white px-8 py-4 rounded-lg font-medium">
+                                  Subscribe Now
+                                </div>
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </div>
