@@ -39,6 +39,11 @@ export default function LandingPage() {
   const { user, isLoaded } = useUser()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
+  // Version check - remove this after confirming deployment
+  useEffect(() => {
+    console.log('🚀 SketchToCode Version: 2.1.0 - Navigation Fix Deployed')
+  }, [])
+
   // Close menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
