@@ -26,6 +26,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Progress } from '@/components/ui/progress'
 import { useToast } from '@/components/ui/use-toast'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from '@/components/ui/dropdown-menu'
 import { fileToBase64, downloadFile, copyToClipboard } from '@/lib/utils'
 import Link from 'next/link'
 
@@ -214,25 +215,48 @@ ${result.js}
                 <span className="font-medium text-indigo-600">{credits} credits</span>
               </div>
 
-              <Link href="/app/history">
-                <Button variant="ghost" size="sm" className="gap-2">
-                  <History className="w-4 h-4" />
-                  History
-                </Button>
-              </Link>
-
-              <Link href="/pricing">
-                <Button variant="ghost" size="sm" className="gap-2">
-                  <CreditCard className="w-4 h-4" />
-                  Buy Credits
-                </Button>
-              </Link>
-
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full flex items-center justify-center text-white font-medium text-sm">
-                  {user?.firstName?.[0] || user?.emailAddresses?.[0]?.emailAddress?.[0]?.toUpperCase()}
-                </div>
-              </div>
+              
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" className="relative h-8 w-8 rounded-full">
+                    <div className="w-8 h-8 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full flex items-center justify-center text-white font-medium text-sm">
+                      {user?.firstName?.[0] || user?.emailAddresses?.[0]?.emailAddress?.[0]?.toUpperCase()}
+                    </div>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-56" align="end" forceMount>
+                  <div className="flex items-center justify-start gap-2 p-2">
+                    <div className="flex flex-col space-y-1 leading-none">
+                      {user?.firstName && user?.lastName && (
+                        <p className="font-medium">{user.firstName} {user.lastName}</p>
+                      )}
+                      {user?.emailAddresses && (
+                        <p className="w-[200px] truncate text-sm text-muted-foreground">
+                          {user.emailAddresses[0].emailAddress}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem asChild>
+                    <Link href="/app/history" className="flex items-center gap-2">
+                      <History className="w-4 h-4" />
+                      History
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link href="/pricing" className="flex items-center gap-2">
+                      <CreditCard className="w-4 h-4" />
+                      Buy Credits
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={() => window.location.href = '/sign-out'} className="flex items-center gap-2">
+                    <LogOut className="w-4 h-4" />
+                    Log out
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
           </div>
         </div>
