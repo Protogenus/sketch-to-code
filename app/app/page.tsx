@@ -209,17 +209,10 @@ ${result.js}
     // Check for successful purchase from URL parameters
     const urlParams = new URLSearchParams(window.location.search)
     if (urlParams.get('success') === 'true') {
-      const purchasedCredits = parseInt(urlParams.get('credits') || '0', 10)
-      if (purchasedCredits > 0) {
-        toast({
-          title: "Purchase successful!",
-          description: `Added ${purchasedCredits} credits to your account.`,
-        })
-        // Clear URL parameters
-        window.history.replaceState({}, '', window.location.pathname)
-        // Refetch credits after a short delay to ensure webhook processed
-        setTimeout(fetchCredits, 2000)
-      }
+      // Clear URL parameters immediately
+      window.history.replaceState({}, '', window.location.pathname)
+      // Refetch credits after a short delay to ensure webhook processed
+      setTimeout(fetchCredits, 2000)
     }
   }, [user, toast])
 
