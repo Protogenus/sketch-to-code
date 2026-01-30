@@ -294,7 +294,7 @@ ${result.js}
       <main className="container mx-auto px-4 py-8">
         <div className="grid lg:grid-cols-2 gap-8">
           {/* Upload Section */}
-          <Card className="h-fit">
+          <Card className="h-full">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <ImageIcon className="w-5 h-5" />
@@ -307,22 +307,21 @@ ${result.js}
                   {...getRootProps()}
                   className={`border-2 border-dashed rounded-xl p-12 text-center cursor-pointer transition-all ${
                     isDragActive
-                      ? 'border-indigo-500 bg-indigo-50'
-                      : 'border-gray-300 hover:border-indigo-400 hover:bg-gray-50'
+                      ? 'border-indigo-500 bg-gradient-to-br from-indigo-50 to-purple-50'
+                      : 'border-gray-300 hover:border-indigo-400 hover:bg-gradient-to-br hover:from-gray-50 hover:to-indigo-50'
                   }`}
                 >
                   <input {...getInputProps()} />
-                  <div className="w-16 h-16 mx-auto mb-4 bg-gray-100 rounded-xl flex items-center justify-center">
-                    <Upload className="w-8 h-8 text-gray-400" />
+                  <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-2xl flex items-center justify-center">
+                    <Upload className="w-10 h-10 text-indigo-600" />
                   </div>
-                  <p className="text-lg font-medium text-gray-700 mb-1">
+                  <p className="text-xl font-semibold text-gray-800 mb-2">
                     {isDragActive ? 'Drop your wireframe here' : 'Drag & drop your wireframe'}
                   </p>
-                  <p className="text-gray-500 mb-4">or click to browse</p>
-                  <p className="text-sm text-gray-400 mb-2">PNG, JPG up to 10MB</p>
-                  <div className="bg-indigo-50 rounded-lg p-3 text-sm text-indigo-700">
-                    <p className="font-medium mb-1">💡 Pro tip:</p>
-                    <p>Combine text + colors for best results! Green + "Subscribe" = prominent CTA. Blue + "Pricing" = pricing table. Colors add styling context to text labels.</p>
+                  <p className="text-gray-600 mb-6 text-lg">or click to browse</p>
+                  <div className="inline-flex items-center gap-2 bg-white px-4 py-2 rounded-full border border-gray-200 shadow-sm">
+                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                    <span className="text-sm text-gray-600">PNG, JPG up to 10MB</span>
                   </div>
                 </div>
               ) : (
@@ -405,7 +404,7 @@ ${result.js}
           </Card>
 
           {/* Preview Section */}
-          <Card className="h-fit">
+          <Card className="h-full">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <CardTitle className="flex items-center gap-2">
@@ -432,32 +431,36 @@ ${result.js}
             </CardHeader>
             <CardContent>
               {!result ? (
-                <div className="border-2 border-dashed rounded-xl p-12 text-center">
-                  <div className="w-16 h-16 mx-auto mb-4 bg-gray-100 rounded-xl flex items-center justify-center">
-                    <FileCode className="w-8 h-8 text-gray-400" />
+                <div className="border-2 border-dashed rounded-xl p-12 text-center bg-gradient-to-br from-gray-50 to-indigo-50">
+                  <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-gray-100 to-indigo-100 rounded-2xl flex items-center justify-center">
+                    <FileCode className="w-10 h-10 text-indigo-600" />
                   </div>
+                  <p className="text-lg font-medium text-gray-700 mb-2">
+                    Ready to generate code
+                  </p>
                   <p className="text-gray-500">
-                    Upload a wireframe and click convert to generate code
+                    Upload a wireframe and click convert to see the magic
                   </p>
                 </div>
               ) : (
                 <Tabs value={activeTab} onValueChange={setActiveTab}>
-                  <TabsList className="w-full">
-                    <TabsTrigger value="preview" className="flex-1">
+                  <TabsList className="w-full bg-gray-100 rounded-lg p-1">
+                    <TabsTrigger value="preview" className="flex-1 data-[state=active]:bg-white data-[state=active]:shadow-sm">
                       <Eye className="w-4 h-4 mr-1" />
                       Preview
                     </TabsTrigger>
-                    <TabsTrigger value="html" className="flex-1">HTML</TabsTrigger>
-                    <TabsTrigger value="css" className="flex-1">CSS</TabsTrigger>
-                    <TabsTrigger value="js" className="flex-1">JS</TabsTrigger>
+                    <TabsTrigger value="html" className="flex-1 data-[state=active]:bg-white data-[state=active]:shadow-sm">HTML</TabsTrigger>
+                    <TabsTrigger value="css" className="flex-1 data-[state=active]:bg-white data-[state=active]:shadow-sm">CSS</TabsTrigger>
+                    <TabsTrigger value="js" className="flex-1 data-[state=active]:bg-white data-[state=active]:shadow-sm">JS</TabsTrigger>
                   </TabsList>
 
                   <TabsContent value="preview" className="mt-4">
-                    <div className="border rounded-lg overflow-hidden bg-white">
-                      <div className="bg-gray-100 px-4 py-2 flex items-center gap-1.5 border-b">
-                        <div className="w-3 h-3 rounded-full bg-red-400" />
-                        <div className="w-3 h-3 rounded-full bg-yellow-400" />
-                        <div className="w-3 h-3 rounded-full bg-green-400" />
+                    <div className="border-2 border-gray-200 rounded-xl overflow-hidden bg-white shadow-lg">
+                      <div className="bg-gradient-to-r from-gray-50 to-indigo-50 px-4 py-3 flex items-center gap-1.5 border-b">
+                        <div className="w-3 h-3 rounded-full bg-red-500 shadow-sm" />
+                        <div className="w-3 h-3 rounded-full bg-yellow-500 shadow-sm" />
+                        <div className="w-3 h-3 rounded-full bg-green-500 shadow-sm" />
+                        <span className="ml-auto text-xs text-gray-500 font-medium">Preview</span>
                       </div>
                       <iframe
                         srcDoc={`<!DOCTYPE html>
@@ -469,7 +472,7 @@ ${result.js}
 </head>
 <body>${result.html}<script>${result.js}</script></body>
 </html>`}
-                        className="w-full h-[400px]"
+                        className="w-full h-[450px] bg-white"
                         title="Preview"
                       />
                     </div>
