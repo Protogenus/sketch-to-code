@@ -79,7 +79,7 @@ export default function PricingPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       {/* Header */}
-      <header className="border-b bg-white">
+      <header className="fixed top-0 left-0 right-0 z-50 glass border-b">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
             <Link href="/" className="flex items-center gap-2">
@@ -88,14 +88,11 @@ export default function PricingPage() {
               </div>
               <span className="font-bold text-xl">SketchToCode</span>
             </Link>
-            
+
             <div className="flex items-center gap-4">
-              {user ? (
+              {isLoaded && user ? (
                 <Link href="/app">
-                  <Button variant="ghost" className="gap-2">
-                    <ArrowLeft className="w-4 h-4" />
-                    Back to App
-                  </Button>
+                  <Button variant="gradient">Go to App</Button>
                 </Link>
               ) : (
                 <>
@@ -113,7 +110,7 @@ export default function PricingPage() {
       </header>
 
       {/* Pricing Section */}
-      <section className="py-20 px-4">
+      <section className="pt-32 pb-20 px-4">
         <div className="container mx-auto">
           <div className="text-center mb-16">
             <h1 className="text-4xl font-bold mb-4">Buy Credits</h1>

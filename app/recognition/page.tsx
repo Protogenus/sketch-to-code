@@ -58,12 +58,6 @@ export default function RecognitionPage() {
               <Link href="/#faq" className="text-gray-600 hover:text-gray-900 transition">FAQ</Link>
             </div>
 
-            <div className="hidden md:flex items-center gap-4">
-              <Link href="/app">
-                <Button variant="gradient">Go to App</Button>
-              </Link>
-            </div>
-
             <div className="flex items-center gap-4">
               {/* Mobile Menu Button */}
               <button
@@ -76,6 +70,10 @@ export default function RecognitionPage() {
                   <div className={`w-full h-0.5 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full transition-all duration-300 ${isMenuOpen ? '-rotate-45 -translate-y-2' : ''}`}></div>
                 </div>
               </button>
+
+              <Link href="/app" className="hidden md:block">
+                <Button variant="gradient">Go to App</Button>
+              </Link>
             </div>
           </div>
         </div>
