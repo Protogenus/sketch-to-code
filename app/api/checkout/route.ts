@@ -31,6 +31,7 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    console.log('Creating checkout session:', { userId, email, packId })
     const session = await createCheckoutSession(userId, email, packId)
 
     return NextResponse.json({ url: session.url })
