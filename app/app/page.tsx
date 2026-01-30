@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { useUser } from '@clerk/nextjs'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -187,6 +187,41 @@ ${result.js}
     setImageFile(null)
     setResult(null)
   }
+
+  // Fetch credits on component mount and check for successful purchase
+  useEffect(() => {
+    if (!user) return
+
+    const fetchCredits = async () => {
+      try {
+        const response = await fetch('/api/credits')
+        if (response.ok) {
+          const data = await response.json()
+          setCredits(data.credits)
+        }
+      } catch (error) {
+        console.error('Failed to fetch credits:', error)
+      }
+    }
+
+    fetchCredits()
+
+    // Check for successful purchase from URL parameters
+    const urlParams = new URLSearchParams(window.location.search)
+    if (urlParams.get('success') === 'true') {
+      const purchasedCredits = parseInt(urlParams.get('credits') || '0', 10)
+      if (purchasedCredits > 0) {
+        toast({
+          title: "Purchase successful!",
+          description: `Added ${purchasedCredits} credits to your account.`,
+        })
+        // Clear URL parameters
+        window.history.replaceState({}, '', window.location.pathname)
+        // Refetch credits after a short delay to ensure webhook processed
+        setTimeout(fetchCredits, 2000)
+      }
+    }
+  }, [user, toast])
 
   if (!isLoaded) {
     return (
