@@ -2,7 +2,7 @@
 
 import { useState, useCallback, useEffect } from 'react'
 import { useDropzone } from 'react-dropzone'
-import { useUser } from '@clerk/nextjs'
+import { useUser, SignOutButton } from '@clerk/nextjs'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   Upload,
@@ -277,10 +277,12 @@ ${result.js}
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={() => window.location.href = '/sign-out'} className="flex items-center gap-2">
-                    <LogOut className="w-4 h-4" />
-                    Log out
-                  </DropdownMenuItem>
+                  <SignOutButton>
+                    <DropdownMenuItem className="flex items-center gap-2">
+                      <LogOut className="w-4 h-4" />
+                      Log out
+                    </DropdownMenuItem>
+                  </SignOutButton>
                 </DropdownMenuContent>
               </DropdownMenu>
             </div>
