@@ -44,7 +44,13 @@ export async function POST(request: NextRequest) {
 
     try {
       console.log('Creating or finding user:', { clerkUserId, email: session.customer_email })
-      await getOrCreateUser(clerkUserId, session.customer_email || '')
+      try {
+        await getOrCreateUser(clerkUserId, session.customer_email || '')
+        console.log('User created/found successfully')
+      } catch (userError) {
+        console.error('Error creating/finding user:', userError)
+        throw userError
+      }
       
       console.log('Adding credits:', { clerkUserId, credits })
       const success = await addCredits(clerkUserId, credits)
