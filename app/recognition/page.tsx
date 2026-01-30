@@ -1,9 +1,9 @@
 "use client"
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { ArrowLeft, Upload, Download, Copy, Check, Palette, Type, Zap } from 'lucide-react'
+import { Upload, Download, Copy, Check, Palette, Type, Zap, Code } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
@@ -16,6 +16,7 @@ const fadeInUp = {
 
 export default function RecognitionPage() {
   const [copied, setCopied] = useState(false)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text)
@@ -23,31 +24,119 @@ export default function RecognitionPage() {
     setTimeout(() => setCopied(false), 2000)
   }
 
+  // Close menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement
+      if (isMenuOpen && !target.closest('header') && !target.closest('[data-mobile-menu]')) {
+        setIsMenuOpen(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [isMenuOpen])
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       {/* Header */}
-      <header className="bg-white border-b sticky top-0 z-50">
+      <header className="fixed top-0 left-0 right-0 z-50 glass border-b">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
             <Link href="/" className="flex items-center gap-2">
               <div className="w-8 h-8 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg flex items-center justify-center">
-                <Type className="w-5 h-5 text-white" />
+                <Code className="w-5 h-5 text-white" />
               </div>
               <span className="font-bold text-xl">SketchToCode</span>
             </Link>
+            
+            <div className="hidden md:flex items-center gap-8">
+              <Link href="/#features" className="text-gray-600 hover:text-gray-900 transition">Features</Link>
+              <Link href="/#how-it-works" className="text-gray-600 hover:text-gray-900 transition">How It Works</Link>
+              <Link href="/recognition" className="text-indigo-600 hover:text-indigo-700 transition font-medium">Smart Recognition</Link>
+              <Link href="/#pricing" className="text-gray-600 hover:text-gray-900 transition">Pricing</Link>
+              <Link href="/#faq" className="text-gray-600 hover:text-gray-900 transition">FAQ</Link>
+              <Link href="/app">
+                <Button variant="gradient">Go to App</Button>
+              </Link>
+            </div>
 
-            <Link href="/">
-              <Button variant="ghost" className="gap-2">
-                <ArrowLeft className="w-4 h-4" />
-                Back to Home
-              </Button>
-            </Link>
+            <div className="flex items-center gap-4">
+              {/* Mobile Menu Button */}
+              <button
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="md:hidden relative w-10 h-10 flex items-center justify-center rounded-xl bg-gradient-to-br from-indigo-50 to-purple-50 border border-indigo-200 hover:from-indigo-100 hover:to-purple-100 transition-all"
+              >
+                <div className="w-6 h-5 flex flex-col justify-center items-center gap-1.5">
+                  <div className={`w-full h-0.5 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full transition-all duration-300 ${isMenuOpen ? 'rotate-45 translate-y-2' : ''}`}></div>
+                  <div className={`w-full h-0.5 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full transition-all duration-300 ${isMenuOpen ? 'opacity-0' : ''}`}></div>
+                  <div className={`w-full h-0.5 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full transition-all duration-300 ${isMenuOpen ? '-rotate-45 -translate-y-2' : ''}`}></div>
+                </div>
+              </button>
+            </div>
           </div>
         </div>
       </header>
 
+      {/* Mobile Menu */}
+      <motion.div
+        initial={{ opacity: 0, height: 0 }}
+        animate={{ 
+          opacity: isMenuOpen ? 1 : 0,
+          height: isMenuOpen ? 'auto' : 0
+        }}
+        className="md:hidden fixed top-16 left-0 right-0 z-40 glass border-b overflow-hidden"
+        data-mobile-menu
+      >
+        <div className="container mx-auto px-4 py-6 space-y-4">
+          <div className="flex flex-col space-y-3">
+            <Link 
+              href="/#features" 
+              className="text-gray-600 hover:text-gray-900 transition py-2 px-4 rounded-lg hover:bg-gray-50"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Features
+            </Link>
+            <Link 
+              href="/#how-it-works" 
+              className="text-gray-600 hover:text-gray-900 transition py-2 px-4 rounded-lg hover:bg-gray-50"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              How It Works
+            </Link>
+            <Link 
+              href="/recognition" 
+              className="text-indigo-600 hover:text-indigo-700 transition py-2 px-4 rounded-lg hover:bg-indigo-50 font-medium"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Smart Recognition
+            </Link>
+            <Link 
+              href="/#pricing" 
+              className="text-gray-600 hover:text-gray-900 transition py-2 px-4 rounded-lg hover:bg-gray-50"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Pricing
+            </Link>
+            <Link 
+              href="/#faq" 
+              className="text-gray-600 hover:text-gray-900 transition py-2 px-4 rounded-lg hover:bg-gray-50"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              FAQ
+            </Link>
+          </div>
+          
+          <div className="flex flex-col space-y-3 pt-4 border-t">
+            <Link href="/app" onClick={() => setIsMenuOpen(false)}>
+              <Button variant="gradient" className="w-full">Go to App</Button>
+            </Link>
+          </div>
+        </div>
+      </motion.div>
+
       {/* Hero Section */}
-      <section className="py-20 px-4">
+      <section className="pt-32 pb-20 px-4">
         <div className="container mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
