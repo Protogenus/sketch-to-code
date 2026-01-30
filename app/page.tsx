@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useUser } from '@clerk/nextjs'
 import { motion } from 'framer-motion'
@@ -39,6 +39,19 @@ export default function LandingPage() {
   const { user, isLoaded } = useUser()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
+  // Close menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement
+      if (isMenuOpen && !target.closest('nav') && !target.closest('[data-mobile-menu]')) {
+        setIsMenuOpen(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [isMenuOpen])
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       {/* Navigation */}
@@ -61,16 +74,28 @@ export default function LandingPage() {
             </div>
 
             <div className="flex items-center gap-4">
+              {/* Mobile Menu Button */}
+              <button
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="md:hidden relative w-10 h-10 flex items-center justify-center rounded-xl bg-gradient-to-br from-indigo-50 to-purple-50 border border-indigo-200 hover:from-indigo-100 hover:to-purple-100 transition-all"
+              >
+                <div className="w-6 h-5 flex flex-col justify-center items-center gap-1.5">
+                  <div className={`w-full h-0.5 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full transition-all duration-300 ${isMenuOpen ? 'rotate-45 translate-y-2' : ''}`}></div>
+                  <div className={`w-full h-0.5 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full transition-all duration-300 ${isMenuOpen ? 'opacity-0' : ''}`}></div>
+                  <div className={`w-full h-0.5 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full transition-all duration-300 ${isMenuOpen ? '-rotate-45 -translate-y-2' : ''}`}></div>
+                </div>
+              </button>
+
               {isLoaded && user ? (
-                <Link href="/app">
+                <Link href="/app" className="hidden md:block">
                   <Button variant="gradient">Go to App</Button>
                 </Link>
               ) : (
                 <>
-                  <Link href="/sign-in">
+                  <Link href="/sign-in" className="hidden md:block">
                     <Button variant="ghost">Sign In</Button>
                   </Link>
-                  <Link href="/sign-up">
+                  <Link href="/sign-up" className="hidden md:block">
                     <Button variant="gradient">Get Started Free</Button>
                   </Link>
                 </>
@@ -79,6 +104,74 @@ export default function LandingPage() {
           </div>
         </div>
       </nav>
+
+      {/* Mobile Menu */}
+      <motion.div
+        initial={{ opacity: 0, height: 0 }}
+        animate={{ 
+          opacity: isMenuOpen ? 1 : 0,
+          height: isMenuOpen ? 'auto' : 0
+        }}
+        className="md:hidden fixed top-16 left-0 right-0 z-40 glass border-b overflow-hidden"
+        data-mobile-menu
+      >
+        <div className="container mx-auto px-4 py-6 space-y-4">
+          <div className="flex flex-col space-y-3">
+            <Link 
+              href="#features" 
+              className="text-gray-600 hover:text-gray-900 transition py-2 px-4 rounded-lg hover:bg-gray-50"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Features
+            </Link>
+            <Link 
+              href="#how-it-works" 
+              className="text-gray-600 hover:text-gray-900 transition py-2 px-4 rounded-lg hover:bg-gray-50"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              How It Works
+            </Link>
+            <Link 
+              href="/recognition" 
+              className="text-gray-600 hover:text-gray-900 transition py-2 px-4 rounded-lg hover:bg-gray-50"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Smart Recognition
+            </Link>
+            <Link 
+              href="#pricing" 
+              className="text-gray-600 hover:text-gray-900 transition py-2 px-4 rounded-lg hover:bg-gray-50"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Pricing
+            </Link>
+            <Link 
+              href="#faq" 
+              className="text-gray-600 hover:text-gray-900 transition py-2 px-4 rounded-lg hover:bg-gray-50"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              FAQ
+            </Link>
+          </div>
+          
+          <div className="flex flex-col space-y-3 pt-4 border-t">
+            {isLoaded && user ? (
+              <Link href="/app" onClick={() => setIsMenuOpen(false)}>
+                <Button variant="gradient" className="w-full">Go to App</Button>
+              </Link>
+            ) : (
+              <>
+                <Link href="/sign-in" onClick={() => setIsMenuOpen(false)}>
+                  <Button variant="ghost" className="w-full">Sign In</Button>
+                </Link>
+                <Link href="/sign-up" onClick={() => setIsMenuOpen(false)}>
+                  <Button variant="gradient" className="w-full">Get Started Free</Button>
+                </Link>
+              </>
+            )}
+          </div>
+        </div>
+      </motion.div>
 
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-4">
@@ -89,12 +182,12 @@ export default function LandingPage() {
             transition={{ duration: 0.6 }}
           >
                         
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-6 leading-tight break-words">
               Transform Your <span className="text-gradient">Wireframes</span>
               <br />Into Production Code
             </h1>
             
-            <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+            <p className="text-lg sm:text-xl text-gray-600 mb-8 max-w-2xl mx-auto px-4">
               Draw your website on paper, in MS Paint, or any tool - snap a photo, and get clean, responsive HTML/CSS/JavaScript in seconds. No design skills required.
             </p>
 
@@ -135,19 +228,19 @@ export default function LandingPage() {
                 <div className="flex-1 text-center text-sm text-gray-500">SketchToCode Converter</div>
               </div>
               <div className="grid md:grid-cols-2 divide-x">
-                <div className="p-8 bg-gray-50">
-                  <div className="aspect-[4/3] bg-white rounded-lg border-2 border-dashed border-gray-300 flex items-center justify-center">
-                    <div className="text-center p-8">
-                      <div className="w-20 h-20 mx-auto mb-4 bg-gray-100 rounded-xl flex items-center justify-center">
-                        <Upload className="w-10 h-10 text-gray-400" />
+                <div className="p-4 md:p-8 bg-gray-50">
+                  <div className="bg-white rounded-lg border-2 border-dashed border-gray-300 flex items-center justify-center min-h-[200px] md:min-h-[300px]">
+                    <div className="text-center p-4 md:p-8 max-w-full">
+                      <div className="w-16 h-16 md:w-20 md:h-20 mx-auto mb-4 bg-gray-100 rounded-xl flex items-center justify-center">
+                        <Upload className="w-8 h-8 md:w-10 md:h-10 text-gray-400" />
                       </div>
-                      <p className="text-gray-500 font-medium">Drop your wireframe here</p>
-                      <p className="text-gray-400 text-sm mt-1">PNG, JPG up to 10MB</p>
+                      <p className="text-gray-500 font-medium text-sm md:text-base break-words">Drop your wireframe here</p>
+                      <p className="text-gray-400 text-xs md:text-sm mt-1">PNG, JPG up to 10MB</p>
                     </div>
                   </div>
                 </div>
-                <div className="p-8">
-                  <div className="aspect-[4/3] bg-gray-900 rounded-lg p-4 font-mono text-sm text-left overflow-hidden">
+                <div className="p-4 md:p-8">
+                  <div className="bg-gray-900 rounded-lg p-2 md:p-4 font-mono text-xs md:text-sm text-left overflow-hidden min-h-[200px] md:min-h-[300px]">
                     <pre className="text-green-400">
 {`<!DOCTYPE html>
 <html lang="en">
