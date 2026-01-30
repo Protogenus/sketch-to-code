@@ -41,7 +41,9 @@ export default function LandingPage() {
 
   // Version check - remove this after confirming deployment
   useEffect(() => {
-    console.log('🚀 SketchToCode Version: 2.1.0 - Navigation Fix Deployed')
+    console.log('�🔥🔥 VERSION 3.0.0 - DEPLOYMENT TEST 🔥🔥🔥')
+    console.log('Smart Recognition should be PUBLIC now')
+    console.log('Navigation should be CONSISTENT across pages')
   }, [])
 
   // Close menu when clicking outside
