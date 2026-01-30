@@ -102,7 +102,13 @@ export async function POST(request: NextRequest) {
 - **Content:** "Article"/Blue → <article>, "Form"/Yellow → contact form, "Grid"/Blue → grid container, "Card"/Blue → card components
 - **UI:** "Button"/Red → <button>, "Modal"/Blue → modal dialog, "Accordion"/Blue → collapsible content, "Tabs"/Gray → tab navigation, "Carousel"/Blue → image slider, "Dropdown"/Gray → dropdown menu
 
-**Important:** All generated code must work as standalone HTML/CSS/JS files without backend dependencies. Use both text labels AND colors to determine element types.
+**Priority System:**
+1. **Text labels take priority** over colors (if someone writes "Header" in red, it's still a header)
+2. **Colors work best for unlabeled elements** (blue box without text = card)
+3. **Conflicts resolved by text** (text labels override color suggestions)
+4. **When in doubt, use text labels** for clarity
+
+**Important:** All generated code must work as standalone HTML/CSS/JS files without backend dependencies. Use text labels for important elements, colors for quick visual organization.
 
 Focus on creating a beautiful, modern, responsive website. Return ONLY a valid JSON object with html, css, js, react, and structure fields.`,
             },
