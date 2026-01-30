@@ -2,7 +2,6 @@ import { auth } from '@clerk/nextjs/server'
 import { NextRequest, NextResponse } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
 import { getUserCredits, deductCredit, saveConversion } from '@/lib/supabase'
-import { analyzeCodeQuality } from '@/lib/codeQuality'
 
 const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY!,
@@ -89,43 +88,65 @@ export async function POST(request: NextRequest) {
             },
             {
               type: 'text',
-              text: `Convert this wireframe to production-ready code. 
+              text: `Convert this wireframe to clean, modern, responsive code.
 
-**IMPORTANT INSTRUCTIONS:**
-- Look for handwritten labels AND color coding to create appropriate HTML elements:
+**REQUIREMENTS:**
 
-**Color Coding System:**
-- **Blue** → Cards, containers, content blocks
-- **Green** → Hero sections, main CTAs
-- **Red/Pink** → Buttons, important actions
-- **Orange** → Pricing tables, features
-- **Purple** → Testimonials, quotes
-- **Yellow** → Forms, input fields
-- **Gray** → Navigation, headers, footers
-- **Teal** → Sidebars, secondary content
+1. **Semantic HTML5 Structure:**
+   - Use proper semantic elements (header, nav, main, section, article, aside, footer)
+   - Single H1 per page, proper heading hierarchy (h1-h6)
+   - Proper document structure with DOCTYPE, meta charset, viewport
 
-**Text Labels + Colors:**
-- **Layout:** "Header"/Gray → <header>, "Navigation"/Gray → <nav>, "Sidebar"/Teal → <aside>, "Main Content"/Blue → <main>, "Footer"/Gray → <footer>
-- **Marketing:** "Hero"/Green → hero section, "CTA"/Green → call-to-action, "Testimonial"/Purple → testimonial cards, "Pricing"/Orange → pricing table, "Features"/Orange → feature grid
-- **Content:** "Article"/Blue → <article>, "Form"/Yellow → contact form, "Grid"/Blue → grid container, "Card"/Blue → card components
-- **UI:** "Button"/Red → <button>, "Modal"/Blue → modal dialog, "Accordion"/Blue → collapsible content, "Tabs"/Gray → tab navigation, "Carousel"/Blue → image slider, "Dropdown"/Gray → dropdown menu
+2. **Modern CSS:**
+   - Mobile-first responsive design with media queries
+   - Use Flexbox and Grid for layouts
+   - CSS custom properties for colors
+   - Smooth transitions and hover effects
+   - Professional typography and spacing
 
-**Smart Combination System:**
-1. **Text labels define the element type** (Button, Header, Card, etc.)
-2. **Colors suggest styling/layout context** (Green = prominent, Blue = standard, Red = action)
-3. **Colors enhance text labels** (Green + "Subscribe" → prominent CTA section)
-4. **Colors alone create basic elements** (blue box = generic card)
-5. **Conflicts resolved intelligently** (text wins, but color influences styling)
+3. **Interactive Elements:**
+   - Working buttons with hover states
+   - Functional forms with basic validation
+   - Smooth scrolling navigation
+   - Interactive components (accordions, tabs if appropriate)
 
-**Example Combinations:**
-- Green box + "Subscribe" → Prominent CTA section with subscribe form
-- Blue box + "Pricing" → Standard pricing table layout
-- Red box + "Button" → Action-styled button
-- Purple box + "Testimonial" → Emphasized testimonial card
+4. **Accessibility:**
+   - Alt text for all images
+   - Proper form labels
+   - Semantic markup for screen readers
+   - Keyboard navigation support
 
-**Important:** All generated code must work as standalone HTML/CSS/JS files without backend dependencies. Use text labels for specific elements, colors for visual hierarchy and styling context.
+5. **Professional Design:**
+   - Modern color scheme with good contrast
+   - Consistent spacing and typography
+   - Clean, organized CSS structure
+   - Professional animations and transitions
 
-Focus on creating a beautiful, modern, responsive website. Return ONLY a valid JSON object with html, css, js, react, and structure fields.`,
+**Color & Label Recognition:**
+- Blue boxes: Cards, containers, content sections
+- Green boxes: Hero sections, CTAs, important content
+- Red/Pink boxes: Buttons, actions, alerts
+- Orange boxes: Pricing, features, highlights
+- Purple boxes: Testimonials, quotes, special content
+- Yellow boxes: Forms, inputs, user interactions
+- Gray boxes: Navigation, headers, footers
+- Teal boxes: Sidebars, secondary content
+
+**Text Labels:**
+- Look for handwritten text to identify elements
+- "Header", "Nav", "Footer" → semantic elements
+- "Button", "Submit" → interactive elements
+- "Form", "Input" → form elements
+- "Card", "Section" → content containers
+
+**Output Requirements:**
+- Complete, working HTML document
+- Production-ready CSS with organization
+- Functional JavaScript for interactions
+- Mobile responsive design
+- Professional appearance
+
+Return ONLY valid JSON with html, css, js, react, and structure fields.`,
             },
           ],
         },
@@ -259,21 +280,6 @@ body { font-family: system-ui, sans-serif; line-height: 1.6; color: #1f2937; }
       )
     }
 
-    // Analyze code quality
-    const qualityScore = analyzeCodeQuality(
-      parsedResult.html || '',
-      parsedResult.css || '',
-      parsedResult.js || ''
-    )
-
-    console.log('Code Quality Analysis:', {
-      userId,
-      overall: qualityScore.overall,
-      grade: qualityScore.grade,
-      issues: qualityScore.issues.length,
-      suggestions: qualityScore.suggestions.length
-    })
-
     await saveConversion(
       userId,
       `data:image/jpeg;base64,${image.substring(0, 100)}...`,
@@ -287,7 +293,6 @@ body { font-family: system-ui, sans-serif; line-height: 1.6; color: #1f2937; }
       js: parsedResult.js || '',
       react: parsedResult.react,
       json: parsedResult.structure || parsedResult,
-      qualityScore: qualityScore
     })
   } catch (error: any) {
     console.error('Conversion error:', error)

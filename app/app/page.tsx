@@ -29,7 +29,6 @@ import { useToast } from '@/hooks/use-toast'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { formatPrice } from '@/lib/utils'
 import { getConversions, downloadFile, copyToClipboard } from '@/lib/conversions'
-import { QualityScoreDisplay } from '@/components/ui/quality-score'
 import Link from 'next/link'
 
 type ExportFormat = 'html' | 'react' | 'json'
@@ -40,20 +39,6 @@ interface ConversionResult {
   js: string
   react: string
   json: object
-  qualityScore?: {
-    overall: number
-    breakdown: {
-      semantics: number
-      structure: number
-      styling: number
-      responsiveness: number
-      accessibility: number
-      bestPractices: number
-    }
-    issues: string[]
-    suggestions: string[]
-    grade: 'A' | 'B' | 'C' | 'D' | 'F'
-  }
 }
 
 export default function ConverterApp() {
@@ -493,13 +478,7 @@ ${result.js}
                       />
                     </div>
                     
-                    {/* Quality Score Display */}
-                    {result.qualityScore && (
-                      <div className="mt-6">
-                        <QualityScoreDisplay score={result.qualityScore} />
-                      </div>
-                    )}
-                  </TabsContent>
+                                      </TabsContent>
 
                   <TabsContent value="html" className="mt-4">
                     <pre className="code-preview p-4 max-h-[400px] overflow-auto">
