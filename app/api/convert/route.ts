@@ -84,14 +84,25 @@ export async function POST(request: NextRequest) {
               text: `Convert this wireframe to production-ready code. 
 
 **IMPORTANT INSTRUCTIONS:**
-- Look for handwritten labels and create appropriate HTML elements (all work in static sites):
-- **Layout:** "Header" → <header>, "Navigation"/"Nav" → <nav>, "Sidebar" → <aside>, "Main Content" → <main>, "Footer" → <footer>, "Section" → <section>
-- **Marketing:** "Hero" → hero section, "CTA" → call-to-action section, "Testimonial" → testimonial cards, "Pricing" → pricing table, "Features" → feature grid
-- **Content:** "Article" → <article>, "Form" → contact form (works with email services), "Grid" → grid container, "Card" → card components
-- **UI:** "Button" → <button>, "Modal" → modal dialog, "Accordion" → collapsible content, "Tabs" → tab navigation, "Carousel" → image slider, "Dropdown" → dropdown menu
-- **Navigation:** "Breadcrumb" → breadcrumb navigation
-- **Important:** All generated code must work as standalone HTML/CSS/JS files without backend dependencies
-- Use the labels to understand the layout structure and create semantic, accessible HTML
+- Look for handwritten labels AND color coding to create appropriate HTML elements:
+
+**Color Coding System:**
+- **Blue** → Cards, containers, content blocks
+- **Green** → Hero sections, main CTAs
+- **Red/Pink** → Buttons, important actions
+- **Orange** → Pricing tables, features
+- **Purple** → Testimonials, quotes
+- **Yellow** → Forms, input fields
+- **Gray** → Navigation, headers, footers
+- **Teal** → Sidebars, secondary content
+
+**Text Labels + Colors:**
+- **Layout:** "Header"/Gray → <header>, "Navigation"/Gray → <nav>, "Sidebar"/Teal → <aside>, "Main Content"/Blue → <main>, "Footer"/Gray → <footer>
+- **Marketing:** "Hero"/Green → hero section, "CTA"/Green → call-to-action, "Testimonial"/Purple → testimonial cards, "Pricing"/Orange → pricing table, "Features"/Orange → feature grid
+- **Content:** "Article"/Blue → <article>, "Form"/Yellow → contact form, "Grid"/Blue → grid container, "Card"/Blue → card components
+- **UI:** "Button"/Red → <button>, "Modal"/Blue → modal dialog, "Accordion"/Blue → collapsible content, "Tabs"/Gray → tab navigation, "Carousel"/Blue → image slider, "Dropdown"/Gray → dropdown menu
+
+**Important:** All generated code must work as standalone HTML/CSS/JS files without backend dependencies. Use both text labels AND colors to determine element types.
 
 Focus on creating a beautiful, modern, responsive website. Return ONLY a valid JSON object with html, css, js, react, and structure fields.`,
             },

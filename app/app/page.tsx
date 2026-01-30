@@ -322,7 +322,7 @@ ${result.js}
                   <p className="text-sm text-gray-400 mb-2">PNG, JPG up to 10MB</p>
                   <div className="bg-indigo-50 rounded-lg p-3 text-sm text-indigo-700">
                     <p className="font-medium mb-1">💡 Pro tip:</p>
-                    <p>Label elements for better results! Basic: Header, Nav, Main, Footer. Advanced: Hero, CTA, Pricing, Features, Testimonial, Form, Modal, Tabs. All work as static sites!</p>
+                    <p>Use text labels OR color coding! Blue=Cards, Green=Hero/CTA, Red=Buttons, Orange=Pricing/Features, Purple=Testimonials, Yellow=Forms, Gray=Nav/Header/Footer, Teal=Sidebar.</p>
                   </div>
                 </div>
               ) : (
