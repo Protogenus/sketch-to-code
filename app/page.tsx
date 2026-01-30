@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import { useUser } from '@clerk/nextjs'
 import { motion } from 'framer-motion'
 import { 
   Upload, 
@@ -35,6 +36,7 @@ const stagger = {
 }
 
 export default function LandingPage() {
+  const { user, isLoaded } = useUser()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   return (
@@ -58,12 +60,20 @@ export default function LandingPage() {
             </div>
 
             <div className="flex items-center gap-4">
-              <Link href="/sign-in">
-                <Button variant="ghost">Sign In</Button>
-              </Link>
-              <Link href="/sign-up">
-                <Button variant="gradient">Get Started Free</Button>
-              </Link>
+              {isLoaded && user ? (
+                <Link href="/app">
+                  <Button variant="gradient">Go to App</Button>
+                </Link>
+              ) : (
+                <>
+                  <Link href="/sign-in">
+                    <Button variant="ghost">Sign In</Button>
+                  </Link>
+                  <Link href="/sign-up">
+                    <Button variant="gradient">Get Started Free</Button>
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         </div>
@@ -339,8 +349,8 @@ export default function LandingPage() {
                     <span>Live preview</span>
                   </li>
                 </ul>
-                <Link href="/sign-up" className="block mt-6">
-                  <Button className="w-full" variant="outline">Get Started</Button>
+                <Link href={isLoaded && user ? "/app" : "/sign-up"} className="block mt-6">
+                  <Button className="w-full" variant="outline">{isLoaded && user ? "Go to App" : "Get Started"}</Button>
                 </Link>
               </CardContent>
             </Card>
@@ -519,9 +529,9 @@ export default function LandingPage() {
           <p className="text-xl opacity-90 mb-8 max-w-2xl mx-auto">
             Join thousands of developers who save hours with AI-powered wireframe conversion.
           </p>
-          <Link href="/sign-up">
+          <Link href={isLoaded && user ? "/app" : "/sign-up"}>
             <Button size="xl" className="bg-white text-indigo-600 hover:bg-gray-100 gap-2">
-              Get Started Free
+              {isLoaded && user ? "Go to App" : "Get Started Free"}
               <ArrowRight className="w-5 h-5" />
             </Button>
           </Link>
